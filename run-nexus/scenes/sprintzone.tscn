@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://m61eujw5pmg5"]
+
+[ext_resource type="Script" path="res://scripts/sprintzone.gd" id="1_gkp57"]
+
+[node name="sprintzone" type="Area2D"]
+script = ExtResource("1_gkp57")
+metadata/sprintzone = true
