@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bgfs1i5qsypea"]
+[gd_scene load_steps=15 format=4 uid="uid://bgfs1i5qsypea"]
 
 [ext_resource type="PackedScene" uid="uid://bca4ihx55b5p2" path="res://scenes/player.tscn" id="1_nk3fm"]
 [ext_resource type="Texture2D" uid="uid://ciikaw15ty0bh" path="res://resources/background/sky.png" id="1_rxrvy"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://5cssdx6vn8nk" path="res://resources/sprites/floor draft.png" id="6_emjbs"]
 [ext_resource type="PackedScene" uid="uid://dr3pumshdb2e2" path="res://scenes/killzone.tscn" id="7_43j54"]
 [ext_resource type="PackedScene" uid="uid://m61eujw5pmg5" path="res://scenes/sprintzone.tscn" id="8_xh5vs"]
+[ext_resource type="PackedScene" uid="uid://31x65ma23n23" path="res://scenes/obstacle_1.tscn" id="9_f57qy"]
+[ext_resource type="PackedScene" uid="uid://isly37l7d218" path="res://scenes/obstacle_2.tscn" id="10_i5714"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3j6tv"]
 texture = ExtResource("6_emjbs")
@@ -330,3 +332,9 @@ position = Vector2(13016, 791)
 position = Vector2(3808.95, 354.208)
 scale = Vector2(280.511, 12.1831)
 shape = SubResource("RectangleShape2D_4t45w")
+
+[node name="Sprite2D" parent="." instance=ExtResource("9_f57qy")]
+position = Vector2(764, 389)
+
+[node name="Sprite2D2" parent="." instance=ExtResource("10_i5714")]
+position = Vector2(1230, 228)

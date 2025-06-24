@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://isly37l7d218"]
+
+[ext_resource type="PackedScene" uid="uid://dr3pumshdb2e2" path="res://scenes/killzone.tscn" id="1_0iohi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_le10p"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xijdy"]
+size = Vector2(40, 41)
+
+[node name="Sprite2D" type="Sprite2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.757679, 0.485577, 0.0336251, 1)
+
+[node name="Killzone" parent="." instance=ExtResource("1_0iohi")]
+position = Vector2(30, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-10, -12)
+shape = SubResource("RectangleShape2D_le10p")
+
+[node name="Area2D" type="Area2D" parent="."]
+metadata/obstacle_jump_2 = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(20, 19.5)
+shape = SubResource("RectangleShape2D_xijdy")
