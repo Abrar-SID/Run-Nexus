@@ -1,15 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bccw4fsbdtyu8"]
+[gd_scene load_steps=5 format=3 uid="uid://bccw4fsbdtyu8"]
 
 [ext_resource type="PackedScene" uid="uid://3wxtqo3xrg85" path="res://scenes/world_icon.tscn" id="1_ijb5f"]
 [ext_resource type="Script" path="res://scripts/level_selection.gd" id="1_yo2sw"]
 [ext_resource type="PackedScene" uid="uid://bmpclaaxl4jf6" path="res://scenes/player_icon.tscn" id="3_vpnfn"]
+[ext_resource type="Texture2D" uid="uid://d3aef1ev1btxa" path="res://icon.svg" id="4_nobda"]
 
-[node name="LevelSelection" type="Control"]
+[node name="LevelSelection" type="Control" node_paths=PackedStringArray("player_icon")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1286.0
+offset_left = 1.0
+offset_right = 1287.0
 offset_bottom = 904.0
 script = ExtResource("1_yo2sw")
+player_icon = NodePath("playerIcon")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="WorldIcon" parent="." instance=ExtResource("1_ijb5f")]
 offset_left = 911.0
@@ -39,7 +47,372 @@ offset_bottom = 493.0
 level_index = 4
 
 [node name="playerIcon" parent="." instance=ExtResource("3_vpnfn")]
+visible = false
 layout_mode = 0
-offset_left = 8.0
-offset_right = 136.0
-offset_bottom = 128.0
+offset_left = 1147.0
+offset_top = 15.0
+offset_right = 1275.0
+offset_bottom = 143.0
+
+[node name="1sliderPatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 722.0
+
+[node name="BG" type="ColorRect" parent="1sliderPatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.388235, 0.388235, 0.388235, 1)
+
+[node name="sliderContentContainer" type="VBoxContainer" parent="1sliderPatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="headerContainer" type="HBoxContainer" parent="1sliderPatchRect/sliderContentContainer"]
+layout_mode = 2
+
+[node name="backbuttonContainer" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer/headerContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="backtoHomeButton" type="Button" parent="1sliderPatchRect/sliderContentContainer/headerContainer/backbuttonContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BACK"
+
+[node name="titleContainer" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer/headerContainer"]
+layout_mode = 2
+
+[node name="levelSelectionTitle" type="Label" parent="1sliderPatchRect/sliderContentContainer/headerContainer/titleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "Select location"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="thumbnail" type="TextureRect" parent="1sliderPatchRect/sliderContentContainer"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_nobda")
+
+[node name="sliderInfoText" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="infoTextLabel" type="Label" parent="1sliderPatchRect/sliderContentContainer/sliderInfoText"]
+layout_mode = 2
+text = "fvjfnifnfjbnvdj nfvfdjdddddddddddddddddddddddddddddddddddddddddd
+vfvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+sssssssssssss
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+fefffffffffff"
+
+[node name="startButtonContainer" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="1levelStartButton" type="Button" parent="1sliderPatchRect/sliderContentContainer/startButtonContainer"]
+custom_minimum_size = Vector2(600, 50)
+layout_mode = 2
+text = "START LEVEL 1"
+
+[node name="2sliderPatchRect2" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 722.0
+
+[node name="BG" type="ColorRect" parent="2sliderPatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.388235, 0.388235, 0.388235, 1)
+
+[node name="sliderContentContainer" type="VBoxContainer" parent="2sliderPatchRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="headerContainer" type="HBoxContainer" parent="2sliderPatchRect2/sliderContentContainer"]
+layout_mode = 2
+
+[node name="backbuttonContainer" type="MarginContainer" parent="2sliderPatchRect2/sliderContentContainer/headerContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="backtoHomeButton" type="Button" parent="2sliderPatchRect2/sliderContentContainer/headerContainer/backbuttonContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BACK"
+
+[node name="titleContainer" type="MarginContainer" parent="2sliderPatchRect2/sliderContentContainer/headerContainer"]
+layout_mode = 2
+
+[node name="levelSelectionTitle" type="Label" parent="2sliderPatchRect2/sliderContentContainer/headerContainer/titleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "Select location"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="thumbnail" type="TextureRect" parent="2sliderPatchRect2/sliderContentContainer"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_nobda")
+
+[node name="sliderInfoText" type="MarginContainer" parent="2sliderPatchRect2/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="infoTextLabel" type="Label" parent="2sliderPatchRect2/sliderContentContainer/sliderInfoText"]
+layout_mode = 2
+text = "fvjfnifnfjbnvdj nfvfdjdddddddddddddddddddddddddddddddddddddddddd
+vfvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+sssssssssssss
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+fefffffffffff"
+
+[node name="startButtonContainer" type="MarginContainer" parent="2sliderPatchRect2/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="2levelStartButton" type="Button" parent="2sliderPatchRect2/sliderContentContainer/startButtonContainer"]
+custom_minimum_size = Vector2(600, 50)
+layout_mode = 2
+text = "START Level 2"
+
+[node name="3sliderPatchRect3" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 722.0
+
+[node name="BG" type="ColorRect" parent="3sliderPatchRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.388235, 0.388235, 0.388235, 1)
+
+[node name="sliderContentContainer" type="VBoxContainer" parent="3sliderPatchRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="headerContainer" type="HBoxContainer" parent="3sliderPatchRect3/sliderContentContainer"]
+layout_mode = 2
+
+[node name="backbuttonContainer" type="MarginContainer" parent="3sliderPatchRect3/sliderContentContainer/headerContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="backtoHomeButton" type="Button" parent="3sliderPatchRect3/sliderContentContainer/headerContainer/backbuttonContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BACK"
+
+[node name="titleContainer" type="MarginContainer" parent="3sliderPatchRect3/sliderContentContainer/headerContainer"]
+layout_mode = 2
+
+[node name="levelSelectionTitle" type="Label" parent="3sliderPatchRect3/sliderContentContainer/headerContainer/titleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "Select location"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="thumbnail" type="TextureRect" parent="3sliderPatchRect3/sliderContentContainer"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_nobda")
+
+[node name="sliderInfoText" type="MarginContainer" parent="3sliderPatchRect3/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="infoTextLabel" type="Label" parent="3sliderPatchRect3/sliderContentContainer/sliderInfoText"]
+layout_mode = 2
+text = "fvjfnifnfjbnvdj nfvfdjdddddddddddddddddddddddddddddddddddddddddd
+vfvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+sssssssssssss
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+fefffffffffff"
+
+[node name="startButtonContainer" type="MarginContainer" parent="3sliderPatchRect3/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="3levelStartButton" type="Button" parent="3sliderPatchRect3/sliderContentContainer/startButtonContainer"]
+custom_minimum_size = Vector2(600, 50)
+layout_mode = 2
+text = "START LEVEL 3"
+
+[node name="4sliderPatchRect4" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 722.0
+
+[node name="BG" type="ColorRect" parent="4sliderPatchRect4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.388235, 0.388235, 0.388235, 1)
+
+[node name="sliderContentContainer" type="VBoxContainer" parent="4sliderPatchRect4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="headerContainer" type="HBoxContainer" parent="4sliderPatchRect4/sliderContentContainer"]
+layout_mode = 2
+
+[node name="backbuttonContainer" type="MarginContainer" parent="4sliderPatchRect4/sliderContentContainer/headerContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="backtoHomeButton" type="Button" parent="4sliderPatchRect4/sliderContentContainer/headerContainer/backbuttonContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "BACK"
+
+[node name="titleContainer" type="MarginContainer" parent="4sliderPatchRect4/sliderContentContainer/headerContainer"]
+layout_mode = 2
+
+[node name="levelSelectionTitle" type="Label" parent="4sliderPatchRect4/sliderContentContainer/headerContainer/titleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "Select location"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="thumbnail" type="TextureRect" parent="4sliderPatchRect4/sliderContentContainer"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_nobda")
+
+[node name="sliderInfoText" type="MarginContainer" parent="4sliderPatchRect4/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="infoTextLabel" type="Label" parent="4sliderPatchRect4/sliderContentContainer/sliderInfoText"]
+layout_mode = 2
+text = "fvjfnifnfjbnvdj nfvfdjdddddddddddddddddddddddddddddddddddddddddd
+vfvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+sssssssssssss
+s
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+fefffffffffff"
+
+[node name="startButtonContainer" type="MarginContainer" parent="4sliderPatchRect4/sliderContentContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="4levelStartButton" type="Button" parent="4sliderPatchRect4/sliderContentContainer/startButtonContainer"]
+custom_minimum_size = Vector2(600, 50)
+layout_mode = 2
+text = "START LEVEL 4"

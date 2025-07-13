@@ -141,7 +141,6 @@ layout_mode = 2
 text = "BACK"
 
 [node name="inGameUI" type="MarginContainer" parent="."]
-visible = false
 offset_left = 3.0
 offset_right = 1280.0
 offset_bottom = 722.0
