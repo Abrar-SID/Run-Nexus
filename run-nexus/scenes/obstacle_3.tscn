@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnwokinf5ch6v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oio23"]
+size = Vector2(39.5, 39.5)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.0235294, 1, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+metadata/lethal = true
+metadata/anijump_3 = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(20.25, 20.25)
+shape = SubResource("RectangleShape2D_oio23")

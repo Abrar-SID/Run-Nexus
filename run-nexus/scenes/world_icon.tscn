@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://3wxtqo3xrg85"]
+
+[ext_resource type="Script" path="res://scripts/world_icon.gd" id="1_pkmh0"]
+
+[sub_resource type="Gradient" id="Gradient_y2121"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cfhgw"]
+gradient = SubResource("Gradient_y2121")
+width = 128
+height = 128
+fill_to = Vector2(1, 1)
+
+[node name="WorldIcon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_pkmh0")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = -43.0
+offset_right = 126.0
+offset_bottom = 2.0
+theme_override_font_sizes/font_size = 32
+text = "Level 1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("GradientTexture2D_cfhgw")
