@@ -17,7 +17,6 @@ home_menu = NodePath("HomeMenuContainer")
 home_controls_menu = NodePath("HomeToControlsMenuContainer")
 
 [node name="HomeMenuContainer" type="MarginContainer" parent="."]
-visible = false
 offset_right = 1281.0
 offset_bottom = 721.0
 
@@ -67,7 +66,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 
-[node name="PlayButton" type="Button" parent="HomeMenuContainer/ContentContainer/optionsMainMenuContainer"]
+[node name="startGameButton" type="Button" parent="HomeMenuContainer/ContentContainer/optionsMainMenuContainer"]
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
 size_flags_vertical = 3
@@ -141,6 +140,7 @@ layout_mode = 2
 text = "BACK"
 
 [node name="inGameUI" type="MarginContainer" parent="."]
+visible = false
 offset_left = 3.0
 offset_right = 1280.0
 offset_bottom = 722.0
@@ -489,6 +489,7 @@ texture = ExtResource("2_7tgkg")
 expand_mode = 1
 stretch_mode = 4
 
+[connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/startGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/toggleOptionMenuButton" to="." method="_on_toggle_option_menu_button_pressed"]
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleHomeControlsMenuButton" to="." method="_on_toggle_home_controls_menu_button_pressed"]
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleOptionMenuButton" to="." method="_on_toggle_option_menu_button_pressed"]

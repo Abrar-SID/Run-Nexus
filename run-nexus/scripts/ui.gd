@@ -7,7 +7,8 @@ extends Node2D
 @export var home_menu : MarginContainer
 @export var home_controls_menu : MarginContainer
 
-func toggle_visibilty(object) ->void:
+
+func toggle_visibility(object) ->void:
 	if object.visible:
 		object.visible = false
 	else:
@@ -15,20 +16,24 @@ func toggle_visibilty(object) ->void:
 
 
 func _on_toggle_pause_menu_button_pressed() -> void:
-	toggle_visibilty(pause_menu)
-	toggle_visibilty(game_ui)
+	toggle_visibility(pause_menu)
+	toggle_visibility(game_ui)
 
 
 func _on_toggle_controls_menu_button_pressed() -> void:
-	toggle_visibilty(pause_menu)
-	toggle_visibilty(controls_menu)
+	toggle_visibility(pause_menu)
+	toggle_visibility(controls_menu)
 
 
 func _on_toggle_option_menu_button_pressed() -> void:
-	toggle_visibilty(home_menu)
-	toggle_visibilty(options_menu)
+	toggle_visibility(home_menu)
+	toggle_visibility(options_menu)
 
 
 func _on_toggle_home_controls_menu_button_pressed() -> void:
-	toggle_visibilty(options_menu)
-	toggle_visibilty(home_controls_menu)
+	toggle_visibility(options_menu)
+	toggle_visibility(home_controls_menu)
+
+
+func _on_start_game_button_pressed() -> void:
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/level_selection.tscn")

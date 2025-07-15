@@ -1,23 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://bccw4fsbdtyu8"]
+[gd_scene load_steps=8 format=3 uid="uid://bccw4fsbdtyu8"]
 
 [ext_resource type="PackedScene" uid="uid://3wxtqo3xrg85" path="res://scenes/world_icon.tscn" id="1_ijb5f"]
 [ext_resource type="Script" path="res://scripts/level_selection.gd" id="1_yo2sw"]
 [ext_resource type="PackedScene" uid="uid://bmpclaaxl4jf6" path="res://scenes/player_icon.tscn" id="3_vpnfn"]
 [ext_resource type="Texture2D" uid="uid://d3aef1ev1btxa" path="res://icon.svg" id="4_nobda"]
 
-[node name="LevelSelection" type="Control" node_paths=PackedStringArray("player_icon")]
+[sub_resource type="Gradient" id="Gradient_hvgme"]
+offsets = PackedFloat32Array(0.385246, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qklsh"]
+gradient = SubResource("Gradient_hvgme")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y2rp8"]
+texture = SubResource("GradientTexture1D_qklsh")
+
+[node name="LevelSelection" type="Control" node_paths=PackedStringArray("player_icon", "level_1_info", "level_2_info", "level_3_info", "level_4_info")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
-offset_right = 1287.0
-offset_bottom = 904.0
+offset_right = 1281.0
+offset_bottom = 721.0
 script = ExtResource("1_yo2sw")
 player_icon = NodePath("playerIcon")
+level_1_info = NodePath("1sliderPatchRect")
+level_2_info = NodePath("2sliderPatchRect2")
+level_3_info = NodePath("3sliderPatchRect3")
+level_4_info = NodePath("4sliderPatchRect4")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1280.0
+offset_bottom = 723.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_y2rp8")
 
 [node name="WorldIcon" parent="." instance=ExtResource("1_ijb5f")]
 offset_left = 911.0
@@ -47,7 +61,6 @@ offset_bottom = 493.0
 level_index = 4
 
 [node name="playerIcon" parent="." instance=ExtResource("3_vpnfn")]
-visible = false
 layout_mode = 0
 offset_left = 1147.0
 offset_top = 15.0
@@ -416,3 +429,61 @@ theme_override_constants/margin_bottom = 15
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 text = "START LEVEL 4"
+
+[node name="level1Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.345098)
+self_modulate = Color(1, 1, 1, 0.486275)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 911.0
+offset_top = 64.0
+offset_right = 1039.0
+offset_bottom = 192.0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0.427493, 0.427493, 0.427493, 1)
+
+[node name="level2Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.345098)
+self_modulate = Color(1, 1, 1, 0.486275)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 1090.0
+offset_top = 287.0
+offset_right = 1218.0
+offset_bottom = 415.0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0.427493, 0.427493, 0.427493, 1)
+
+[node name="level3Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.345098)
+self_modulate = Color(1, 1, 1, 0.486275)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 902.0
+offset_top = 524.0
+offset_right = 1030.0
+offset_bottom = 652.0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0.427493, 0.427493, 0.427493, 1)
+
+[node name="level4Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.345098)
+self_modulate = Color(1, 1, 1, 0.486275)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 713.0
+offset_top = 367.0
+offset_right = 841.0
+offset_bottom = 495.0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0.427493, 0.427493, 0.427493, 1)
+
+[connection signal="pressed" from="1sliderPatchRect/sliderContentContainer/startButtonContainer/1levelStartButton" to="." method="_on_level_start_button_pressed"]
+[connection signal="pressed" from="level1Button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="level2Button" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="level3Button" to="." method="_on_level_3_button_pressed"]
+[connection signal="pressed" from="level4Button" to="." method="_on_level_4_button_pressed"]
