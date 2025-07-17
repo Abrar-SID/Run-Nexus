@@ -7,6 +7,19 @@ extends Node2D
 @export var home_menu : MarginContainer
 @export var home_controls_menu : MarginContainer
 
+var gameplay_scenes = ["level_1"]
+
+
+func _ready():
+	var current_scene_name = get_tree().current_scene.name
+
+	if current_scene_name in gameplay_scenes:
+		home_menu.visible = false
+		game_ui.visible = true
+	else:
+		home_menu.visible = true
+		game_ui.visible = false
+
 
 func toggle_visibility(object) ->void:
 	if object.visible:

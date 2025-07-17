@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var camera: Camera2D = $Camera2D
+
 
 #Add const and var here
-const SPEED = 200.0
+var SPEED = 200.0
 const JUMP_VELOCITY = -400.0
 
 #Add the Movement: Jump, Run, Slide
@@ -44,9 +46,11 @@ func _physics_process(delta: float) -> void:
 #The special sprint zone is coded here:
 func _on_sprintzone_entered(area: Area2D) -> void:
 	if area.has_meta("sprintzone"):
-		velocity.x = SPEED * 4
+		SPEED = 1000.0
+		
 	else:
-		velocity.x = SPEED
+		SPEED = 200.0
+		
 
 
 func _on_lethal_entered(area: Area2D) -> void:

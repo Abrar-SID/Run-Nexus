@@ -148,6 +148,14 @@ flip_h = true
 scale = Vector2(59, 32.6522)
 shape = SubResource("CircleShape2D_3gh1e")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-4325, -1904.35)
+anchor_mode = 0
+zoom = Vector2(1.8, 1.8)
+limit_left = 0
+drag_horizontal_enabled = true
+editor_draw_screen = false
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_sprintzone_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_lethal_entered"]
 [connection signal="area_entered" from="Area2D2" to="." method="_on_obstacle_entered_jump"]
