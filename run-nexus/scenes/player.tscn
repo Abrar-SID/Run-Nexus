@@ -1,15 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://bca4ihx55b5p2"]
+[gd_scene load_steps=20 format=3 uid="uid://bca4ihx55b5p2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_148j1"]
 [ext_resource type="Texture2D" uid="uid://bkh8h40sa3v84" path="res://resources/sprites/run.png" id="3_flvid"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8utu5"]
-radius = 6.42857
-height = 28.9308
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlibv"]
+size = Vector2(12.8571, 26.4151)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4n2nh"]
-radius = 5.40543
-height = 23.4665
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ioc"]
+size = Vector2(16.2163, 25.9367)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3gh1e"]
+radius = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaor1"]
+atlas = ExtResource("3_flvid")
+region = Rect2(5120, 0, 1024, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmk1q"]
 atlas = ExtResource("3_flvid")
@@ -23,9 +28,9 @@ region = Rect2(3072, 0, 1024, 1024)
 atlas = ExtResource("3_flvid")
 region = Rect2(1024, 0, 1024, 1024)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xaor1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vniue"]
 atlas = ExtResource("3_flvid")
-region = Rect2(5120, 0, 1024, 1024)
+region = Rect2(4096, 0, 1024, 1024)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hourq"]
 atlas = ExtResource("3_flvid")
@@ -55,8 +60,20 @@ region = Rect2(6144, 0, 1024, 1024)
 atlas = ExtResource("3_flvid")
 region = Rect2(7168, 0, 1024, 1024)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt7cc"]
+atlas = ExtResource("3_flvid")
+region = Rect2(1024, 0, 1024, 1024)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_p8ltb"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xaor1")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xmk1q")
@@ -83,11 +100,11 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xaor1")
+"texture": SubResource("AtlasTexture_vniue")
 }],
 "loop": true,
 "name": &"jump_3",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -114,10 +131,15 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt7cc")
+}],
+"loop": true,
+"name": &"wall_slide",
+"speed": 5.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3gh1e"]
-radius = 12.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 5
@@ -125,22 +147,17 @@ scale = Vector2(0.08, 0.115)
 script = ExtResource("1_148j1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.98023e-06, 17.3913)
 scale = Vector2(17.5, 13.8261)
-shape = SubResource("CapsuleShape2D_8utu5")
+shape = SubResource("RectangleShape2D_hlibv")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.50001, 1.69565)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 10.2564)
 scale = Vector2(9.2499, 8.30426)
-shape = SubResource("CapsuleShape2D_4n2nh")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.652, 0.396)
-sprite_frames = SubResource("SpriteFrames_p8ltb")
-animation = &"jump_1"
-autoplay = "idle"
-flip_h = true
+shape = SubResource("RectangleShape2D_h7ioc")
 
 [node name="Area2D2" type="Area2D" parent="."]
 
@@ -148,14 +165,30 @@ flip_h = true
 scale = Vector2(59, 32.6522)
 shape = SubResource("CircleShape2D_3gh1e")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-4325, -1904.35)
-anchor_mode = 0
-zoom = Vector2(1.8, 1.8)
-limit_left = 0
-drag_horizontal_enabled = true
-editor_draw_screen = false
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.652, 0.396)
+sprite_frames = SubResource("SpriteFrames_p8ltb")
+animation = &"wall_slide"
+autoplay = "idle"
+flip_h = true
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_sprintzone_entered"]
+[node name="raycastLeft" type="RayCast2D" parent="."]
+position = Vector2(-25, 78.2609)
+scale = Vector2(1, 5)
+target_position = Vector2(-125, 0)
+
+[node name="raycastRight" type="RayCast2D" parent="."]
+position = Vector2(37.5, 78.2609)
+scale = Vector2(1, 5)
+target_position = Vector2(125, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(12.5, 8.69565)
+zoom = Vector2(1.8, 1.8)
+position_smoothing_enabled = true
+position_smoothing_speed = 50.0
+drag_vertical_enabled = true
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_lethal_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_sprintzone_entered"]
 [connection signal="area_entered" from="Area2D2" to="." method="_on_obstacle_entered_jump"]

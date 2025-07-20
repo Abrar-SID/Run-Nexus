@@ -6,6 +6,8 @@ extends Node2D
 @export var options_menu : MarginContainer
 @export var home_menu : MarginContainer
 @export var home_controls_menu : MarginContainer
+@export var settings : MarginContainer
+@export var home_settings : MarginContainer
 
 var gameplay_scenes = ["level_1"]
 
@@ -50,3 +52,20 @@ func _on_toggle_home_controls_menu_button_pressed() -> void:
 
 func _on_start_game_button_pressed() -> void:
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/level_selection.tscn")
+
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
+
+func _on_quit_button_pressed() -> void:
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/level_selection.tscn")
+
+
+func _on_toggle_settinng_button_pressed() -> void:
+	toggle_visibility(pause_menu)
+	toggle_visibility(settings)
+
+
+func _on_toggle_home_to_settings_button_pressed() -> void:
+	toggle_visibility(options_menu)
+	toggle_visibility(home_settings)

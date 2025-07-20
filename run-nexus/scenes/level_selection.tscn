@@ -482,6 +482,7 @@ theme_override_colors/icon_normal_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.427493, 0.427493, 0.427493, 1)
 
+[connection signal="pressed" from="1sliderPatchRect/sliderContentContainer/headerContainer/backbuttonContainer/backtoHomeButton" to="." method="_on_back_to_home_button_pressed"]
 [connection signal="pressed" from="1sliderPatchRect/sliderContentContainer/startButtonContainer/1levelStartButton" to="." method="_on_level_start_button_pressed"]
 [connection signal="pressed" from="level1Button" to="." method="_on_level_1_button_pressed"]
 [connection signal="pressed" from="level2Button" to="." method="_on_level_2_button_pressed"]
