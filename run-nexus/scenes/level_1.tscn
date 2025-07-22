@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bnwokinf5ch6v" path="res://scenes/obstacle_3.tscn" id="11_mjvll"]
 [ext_resource type="PackedScene" uid="uid://bu648cdlaide7" path="res://scenes/ui.tscn" id="12_gmhqp"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3j6tv"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wxf15"]
 texture = ExtResource("6_emjbs")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -261,7 +261,7 @@ texture = ExtResource("6_emjbs")
 
 [sub_resource type="TileSet" id="TileSet_3qwgr"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_3j6tv")
+sources/0 = SubResource("TileSetAtlasSource_wxf15")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4t45w"]
 size = Vector2(29.5639, 51.2527)

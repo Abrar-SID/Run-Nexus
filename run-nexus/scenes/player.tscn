@@ -189,6 +189,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 50.0
 drag_vertical_enabled = true
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_lethal_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_sprintzone_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_lethal_entered"]
 [connection signal="area_entered" from="Area2D2" to="." method="_on_obstacle_entered_jump"]
