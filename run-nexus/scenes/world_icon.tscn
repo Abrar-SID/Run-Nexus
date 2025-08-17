@@ -1,14 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://3wxtqo3xrg85"]
+[gd_scene load_steps=3 format=3 uid="uid://3wxtqo3xrg85"]
 
 [ext_resource type="Script" path="res://scripts/world_icon.gd" id="1_pkmh0"]
-
-[sub_resource type="Gradient" id="Gradient_y2121"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_cfhgw"]
-gradient = SubResource("Gradient_y2121")
-width = 128
-height = 128
-fill_to = Vector2(1, 1)
+[ext_resource type="Texture2D" uid="uid://bejipf0uskmi3" path="res://resources/sprites/Group 7.png" id="2_tdj7k"]
 
 [node name="WorldIcon" type="Control"]
 layout_mode = 3
@@ -32,4 +25,4 @@ vertical_alignment = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = SubResource("GradientTexture2D_cfhgw")
+texture = ExtResource("2_tdj7k")

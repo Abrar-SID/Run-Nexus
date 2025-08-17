@@ -1,18 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bccw4fsbdtyu8"]
+[gd_scene load_steps=10 format=3 uid="uid://bccw4fsbdtyu8"]
 
 [ext_resource type="PackedScene" uid="uid://3wxtqo3xrg85" path="res://scenes/world_icon.tscn" id="1_ijb5f"]
 [ext_resource type="Script" path="res://scripts/level_selection.gd" id="1_yo2sw"]
+[ext_resource type="Texture2D" uid="uid://c5ppwguha77b8" path="res://resources/background/TV - 2.png" id="2_ldq71"]
 [ext_resource type="PackedScene" uid="uid://bmpclaaxl4jf6" path="res://scenes/player_icon.tscn" id="3_vpnfn"]
 [ext_resource type="Texture2D" uid="uid://d3aef1ev1btxa" path="res://icon.svg" id="4_nobda"]
-
-[sub_resource type="Gradient" id="Gradient_hvgme"]
-offsets = PackedFloat32Array(0.385246, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qklsh"]
-gradient = SubResource("Gradient_hvgme")
+[ext_resource type="Texture2D" uid="uid://x70m4jgydasp" path="res://resources/sprites/Rectangle 13.png" id="5_2r48t"]
+[ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="6_6tjnb"]
+[ext_resource type="Texture2D" uid="uid://f2tvfmruyp0j" path="res://resources/sprites/Group 12.png" id="7_acqds"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y2rp8"]
-texture = SubResource("GradientTexture1D_qklsh")
+texture = ExtResource("2_ldq71")
 
 [node name="LevelSelection" type="Control" node_paths=PackedStringArray("player_icon", "level_1_info", "level_2_info", "level_3_info", "level_4_info")]
 layout_mode = 3
@@ -68,33 +66,49 @@ offset_right = 1275.0
 offset_bottom = 143.0
 
 [node name="1sliderPatchRect" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 722.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.012
+anchor_top = 0.501
+anchor_right = 0.012
+anchor_bottom = 0.501
+offset_left = 27.64
+offset_top = -361.221
+offset_right = 623.64
+offset_bottom = 360.779
+grow_vertical = 2
 
-[node name="BG" type="ColorRect" parent="1sliderPatchRect"]
+[node name="TextureRect" type="TextureRect" parent="1sliderPatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.388235, 0.388235, 0.388235, 1)
+texture = ExtResource("5_2r48t")
 
 [node name="sliderContentContainer" type="VBoxContainer" parent="1sliderPatchRect"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -336.0
+offset_right = 350.0
+offset_bottom = 358.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="1sliderPatchRect/sliderContentContainer"]
 layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="backbuttonContainer" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer/headerContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
+theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
@@ -104,6 +118,15 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_6tjnb")
 text = "BACK"
 
 [node name="titleContainer" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer/headerContainer"]
@@ -113,6 +136,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("6_6tjnb")
 theme_override_font_sizes/font_size = 50
 text = "Select location"
 horizontal_alignment = 1
@@ -124,37 +148,44 @@ custom_minimum_size = Vector2(600, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_nobda")
+texture = ExtResource("7_acqds")
 
 [node name="sliderInfoText" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 5
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 15
 
 [node name="infoTextLabel" type="Label" parent="1sliderPatchRect/sliderContentContainer/sliderInfoText"]
 layout_mode = 2
-text = "fvjfnifnfjbnvdj nfvfdjdddddddddddddddddddddddddddddddddddddddddd
+theme_override_fonts/font = ExtResource("6_6tjnb")
+text = "fvjfnifnfjbnvdj nfvfdjdddddddd
+
+dddddddddddddddddddddddddddddddddd
 vfvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-sssssssssssss
-s
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-fefffffffffff"
+cccccccccccccccccccccccccccccccccccccccccc
+
+ccccccccccccccccccccccccccccccccccc
+cccccc"
 
 [node name="startButtonContainer" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 15
 
 [node name="1levelStartButton" type="Button" parent="1sliderPatchRect/sliderContentContainer/startButtonContainer"]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_font_sizes/font_size = 36
 text = "START LEVEL 1"
 
 [node name="2sliderPatchRect2" type="NinePatchRect" parent="."]

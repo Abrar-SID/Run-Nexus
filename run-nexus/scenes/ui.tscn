@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bu648cdlaide7"]
+[gd_scene load_steps=13 format=3 uid="uid://bu648cdlaide7"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_2mgxj"]
 [ext_resource type="Texture2D" uid="uid://d3aef1ev1btxa" path="res://icon.svg" id="2_7tgkg"]
-[ext_resource type="Texture2D" uid="uid://ciikaw15ty0bh" path="res://resources/background/sky.png" id="2_pfige"]
+[ext_resource type="Texture2D" uid="uid://bpijb31wnhm5y" path="res://resources/background/Frame 1.png" id="2_n8u0g"]
+[ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="3_0k41t"]
 [ext_resource type="Script" path="res://scripts/audio_control.gd" id="4_xg2c3"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_onu3h"]
-texture = ExtResource("2_pfige")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sy0j"]
+texture = ExtResource("2_n8u0g")
 
 [sub_resource type="Gradient" id="Gradient_ek1ox"]
 
@@ -42,7 +43,7 @@ offset_bottom = 721.0
 
 [node name="Panel" type="Panel" parent="HomeMenuContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_onu3h")
+theme_override_styles/panel = SubResource("StyleBoxTexture_1sy0j")
 
 [node name="ContentContainer" type="MarginContainer" parent="HomeMenuContainer"]
 layout_mode = 2
@@ -64,6 +65,7 @@ size_flags_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 90
 text = "RUN"
 uppercase = true
@@ -76,6 +78,7 @@ size_flags_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 180
 text = "NEXUS"
 uppercase = true
@@ -90,6 +93,14 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 50
 text = "PLAY "
 alignment = 2
@@ -98,6 +109,15 @@ alignment = 2
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 50
 text = "OPTIONS "
 alignment = 2
@@ -106,6 +126,15 @@ alignment = 2
 custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 50
 text = "EXIT "
 alignment = 2
@@ -123,10 +152,12 @@ color = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 
 [node name="OptionMenuTitle" type="Label" parent="OptionMenuContainer/PauseTitle"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 100
 text = "O P T I O N S"
 horizontal_alignment = 1
@@ -147,16 +178,22 @@ alignment = 1
 [node name="toggleSettinngButton" type="Button" parent="OptionMenuContainer/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "SETTINGS"
 
 [node name="toggleHomeControlsMenuButton" type="Button" parent="OptionMenuContainer/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "CONTROLS"
 
 [node name="toggleOptionMenuButton" type="Button" parent="OptionMenuContainer/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "BACK"
 
 [node name="inGameUI" type="MarginContainer" parent="."]
@@ -184,6 +221,8 @@ theme_override_constants/margin_top = 15
 [node name="togglePauseMenuButton" type="Button" parent="inGameUI/VBoxContainer/leftCornerContainer/pauseButtonContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 25
 text = "PAUSE"
 
 [node name="MarginContainer" type="MarginContainer" parent="inGameUI/VBoxContainer/leftCornerContainer"]
@@ -194,6 +233,8 @@ theme_override_constants/margin_top = 15
 [node name="RestartButton" type="Button" parent="inGameUI/VBoxContainer/leftCornerContainer/MarginContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 25
 text = "RESTART"
 
 [node name="BottomDistanceContainer" type="MarginContainer" parent="inGameUI/VBoxContainer"]
@@ -203,11 +244,6 @@ theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
-
-[node name="Button" type="Button" parent="inGameUI/VBoxContainer/BottomDistanceContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "DISTANCE LEFT:"
 
 [node name="PauseMenuScreen" type="MarginContainer" parent="."]
 visible = false
@@ -225,10 +261,12 @@ color = Color(0, 0, 0, 0.392157)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 
 [node name="Label" type="Label" parent="PauseMenuScreen/PauseTitle"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 100
 text = "P A U S E D"
 horizontal_alignment = 1
@@ -249,26 +287,36 @@ alignment = 1
 [node name="togglePauseMenuButton" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "RESUME"
 
 [node name="toggleSettinngButton" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "SETTINGS"
 
 [node name="toggleControlsMenuButton" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "CONTROLS"
 
 [node name="RestartButton" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "RESTART"
 
 [node name="QuitButtom" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "QUIT"
 
 [node name="ControlsMenuContainer" type="MarginContainer" parent="."]
@@ -279,7 +327,7 @@ offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="ControlsMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.490196)
+color = Color(0, 0, 0, 0.796078)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ControlsMenuContainer"]
 layout_mode = 2
@@ -292,18 +340,24 @@ theme_override_constants/separation = 50
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/margin_left = 15
+theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
 
 [node name="toggleControlsMenuButton" type="Button" parent="ControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 36
 text = "RETURN"
 
 [node name="Label" type="Label" parent="ControlsMenuContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 80
 text = "CONTROLS: HOW TO PLAY"
 horizontal_alignment = 1
@@ -324,7 +378,8 @@ theme_override_constants/separation = 0
 
 [node name="Label2" type="Label" parent="ControlsMenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 28
 text = "JFeugnvrv
 JVDnvijvrnvijv rihb ivn ejb wojrnb
 fdvnrvbrvbrvnrvnrvjirnvjf vfjobn b 
@@ -402,6 +457,7 @@ color = Color(0, 0, 0, 0.490196)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HomeToControlsMenuContainer"]
 layout_mode = 2
+theme_override_constants/separation = -10
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HomeToControlsMenuContainer/VBoxContainer"]
 layout_mode = 2
@@ -411,18 +467,23 @@ theme_override_constants/separation = 50
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/margin_left = 15
+theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="toggleHomeControlsMenuButton" type="Button" parent="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 30
 text = "RETURN"
 
 [node name="Label" type="Label" parent="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 80
 text = "CONTROLS: HOW TO PLAY"
 horizontal_alignment = 1
@@ -439,11 +500,11 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 0
 
 [node name="Label2" type="Label" parent="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 28
 text = "JFeugnvrv
 JVDnvijvrnvijv rihb ivn ejb wojrnb
 fdvnrvbrvbrvnrvnrvjirnvjf vfjobn b 
@@ -522,11 +583,14 @@ color = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
 
 [node name="Label" type="Label" parent="finishMenu/FinishTitle"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 120
 text = "!!! FINISHED !!!"
 horizontal_alignment = 1
 
@@ -534,6 +598,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/margin_top = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="finishMenu/MarginContainer"]
 layout_mode = 2
@@ -542,19 +607,22 @@ theme_override_constants/separation = 14
 [node name="continueButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "NEXT LEVEL"
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "LVL 2 Coming SOon..."
 
 [node name="restartButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "RETRY"
 
 [node name="levelSelectionButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "EXIT"
 
 [node name="settingsMenu" type="MarginContainer" parent="."]
@@ -566,9 +634,16 @@ offset_bottom = 728.0
 layout_mode = 2
 color = Color(0.190762, 0.190762, 0.190762, 1)
 
-[node name="Label" type="Label" parent="settingsMenu"]
+[node name="MarginContainer3" type="MarginContainer" parent="settingsMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_top = 50
+
+[node name="Label" type="Label" parent="settingsMenu/MarginContainer3"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 100
 text = "SETTINGS"
 horizontal_alignment = 1
@@ -600,8 +675,24 @@ audio_bus_name = "Music"
 [node name="backToPauseButton" type="Button" parent="settingsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "BACK"
+
+[node name="MarginContainer2" type="MarginContainer" parent="settingsMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_bottom = 200
+
+[node name="Label2" type="Label" parent="settingsMenu/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "Music"
+horizontal_alignment = 1
 
 [node name="homeToSettingsMenu" type="MarginContainer" parent="."]
 visible = false
@@ -612,9 +703,16 @@ offset_bottom = 728.0
 layout_mode = 2
 color = Color(0.190762, 0.190762, 0.190762, 1)
 
-[node name="Label" type="Label" parent="homeToSettingsMenu"]
+[node name="MarginContainer3" type="MarginContainer" parent="homeToSettingsMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_top = 50
+
+[node name="Label" type="Label" parent="homeToSettingsMenu/MarginContainer3"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 100
 text = "SETTINGS"
 horizontal_alignment = 1
@@ -646,11 +744,28 @@ audio_bus_name = "Music"
 [node name="backToOptionsButton" type="Button" parent="homeToSettingsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
 text = "BACK"
+
+[node name="MarginContainer2" type="MarginContainer" parent="homeToSettingsMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_bottom = 200
+
+[node name="Label2" type="Label" parent="homeToSettingsMenu/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "Music"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/startGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/toggleOptionMenuButton" to="." method="_on_toggle_option_menu_button_pressed"]
+[connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleSettinngButton" to="." method="_on_toggle_home_to_settings_button_pressed"]
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleHomeControlsMenuButton" to="." method="_on_toggle_home_controls_menu_button_pressed"]
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleOptionMenuButton" to="." method="_on_toggle_option_menu_button_pressed"]

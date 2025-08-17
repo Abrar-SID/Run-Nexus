@@ -358,9 +358,6 @@ position = Vector2(8034, 105)
 [node name="Killzone" parent="." instance=ExtResource("7_43j54")]
 position = Vector2(0, 2068)
 
-[node name="player" parent="." instance=ExtResource("1_nk3fm")]
-position = Vector2(255, 393)
-
 [node name="levelEnd" type="Area2D" parent="."]
 metadata/levelend = true
 
@@ -379,5 +376,8 @@ offset_bottom = 721.0
 color = Color(0, 0, 0, 1)
 
 [node name="generalUI" parent="CanvasLayer" instance=ExtResource("12_gmhqp")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_nk3fm")]
+position = Vector2(154, 393)
 
 [connection signal="body_entered" from="levelEnd" to="." method="_on_level_end_body_entered"]

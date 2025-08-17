@@ -1,13 +1,13 @@
 extends Node2D
 
-@export var fade_buffer: float = 32.0
-@export var fade_time: float = 0.8
-
-@onready var player: CharacterBody2D = $player
+@onready var player: CharacterBody2D = $CharacterBody2D
 @onready var black_rect: ColorRect = $CanvasLayer/ColorRect
 @onready var ui: Node2D = $CanvasLayer/generalUI
 
 var FADE_STARTED = false
+
+@export var fade_buffer: float = 32.0
+@export var fade_time: float = 0.8
 
 func _ready() -> void:
 	black_rect.visible = false
@@ -33,4 +33,3 @@ func start_fade() -> void:
 		$CanvasLayer/generalUI/inGameUI.visible = false
 		player.set_physics_process(false)
 	)
-	

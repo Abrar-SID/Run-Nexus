@@ -69,3 +69,7 @@ func _on_toggle_settinng_button_pressed() -> void:
 func _on_toggle_home_to_settings_button_pressed() -> void:
 	toggle_visibility(options_menu)
 	toggle_visibility(home_settings)
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
