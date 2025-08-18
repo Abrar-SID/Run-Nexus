@@ -14,7 +14,7 @@ extends CharacterBody2D
 const JUMP_VELOCITY = -400.0
 const WALL_JUMP_VELOCITY = -400.0
 const WALL_SLIDE_SPEED = 100.0
-const WALL_SLIDE_FRICTION = 1000.0
+const WALL_SLIDE_FRICTION = 2000.0
 const WALL_JUMP_LOCK_FRAMES = 10
 
 #VARIABLES
@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			
 			# Idle jump handling
-			if abs(velocity.x) < 1.0:
+			if velocity.x == 0:
 				animated_sprite.play("idle_jump")
 			elif jump_zone_animation != "":
 				animated_sprite.play(jump_zone_animation)
@@ -151,14 +151,12 @@ func handle_walljump() -> void:
 	# Add jump press counting system
 	if Input.is_action_just_pressed("jump") and (on_left_wall or on_right_wall):
 		wall_jump_press_count += 1
-		camera.call("start_shake") # shake on every press
 
 
 		# Add double press wall jump mechanic
 		if wall_jump_press_count >= 2:
 			velocity.y = WALL_JUMP_VELOCITY
 			animated_sprite.play("wall_climbing")
-			camera.call("start_shake")
 			wall_jump_press_count = 0
 			return
 
@@ -176,14 +174,17 @@ func _on_zones_entered(area: Area2D) -> void:
 
 
 	# Add multiple jump animations
-	if area.has_meta("ani_jump_1"):
-		jump_zone_animation = "jump_1"
+	if area.has_meta("jump1"):
+		camera.call("start_shake")
+		animated_sprite.play("jump_1")
 
-	elif area.has_meta("ani_jump_2"):
-		jump_zone_animation = "jump_2"
+	elif area.has_meta("jump2"):
+		camera.call("start_shake")
+		animated_sprite.play("jump_2")
 
-	elif area.has_meta("ani_jump_3"):
-		jump_zone_animation = "jump_3"
+	elif area.has_meta("jump3"):
+		camera.call("start_shake")
+		animated_sprite.play("jump_3")
 
 
 
@@ -194,11 +195,12 @@ func _on_zones_exited(area: Area2D) -> void:
 	if area.has_meta("sprintzone"):
 		speed = 200.0
 		in_sprintzone = false
+		camera.call("start_shake")
 
 
 	# Reset to default jump animation when leaving zone
 	if area.has_meta("jump_ani_1") or area.has_meta("jump_ani_2") or area.has_meta("jump_ani_3"):
-		jump_zone_animation = "jump_1"
+		animated_sprite.play("jump_1")
 
 
 # DEATH

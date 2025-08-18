@@ -161,16 +161,22 @@ theme_override_constants/margin_bottom = 15
 
 [node name="infoTextLabel" type="Label" parent="1sliderPatchRect/sliderContentContainer/sliderInfoText"]
 layout_mode = 2
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 10
 theme_override_fonts/font = ExtResource("6_6tjnb")
-text = "fvjfnifnfjbnvdj nfvfdjdddddddd
+text = "W h a t   i s   t h i s   p l a c e ?   A   c i t y ?   A n   a n c i e n t   R u i n? 
 
-dddddddddddddddddddddddddddddddddd
-vfvcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+E v e r y t h i n g s   i s . .  .   s t i l l   i n   p  l a c e . . .
 
-cccccccccccccccccccccccccccccccccccccccccc
+E v e n   t h e   E x p l o s i o n s !
 
-ccccccccccccccccccccccccccccccccccc
-cccccc"
+I   w a n t   t o   f i n d   t h e    r o o t   o f   t h i s    p h e  n o m e n o n 
+
+I   n e e d   t o . . . "
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="startButtonContainer" type="MarginContainer" parent="1sliderPatchRect/sliderContentContainer"]
 layout_mode = 2
