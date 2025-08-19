@@ -485,9 +485,8 @@ position = Vector2(4419, 928)
 scale = Vector2(9.76002, 9.76002)
 
 [node name="Sprite2D12" parent="obstacles" instance=ExtResource("11_mjvll")]
-position = Vector2(7575, 602)
+position = Vector2(7766, 598)
 rotation = -0.0553511
-scale = Vector2(1, 1)
 
 [node name="Sprite2D7" parent="obstacles" instance=ExtResource("11_mjvll")]
 position = Vector2(4356, 990)
@@ -497,7 +496,6 @@ scale = Vector2(5.38152, 5.38152)
 [node name="Sprite2D11" parent="obstacles" instance=ExtResource("11_mjvll")]
 position = Vector2(6095, 575)
 rotation = -0.0369008
-scale = Vector2(1, 1)
 
 [node name="Sprite2D10q" parent="obstacles" instance=ExtResource("11_mjvll")]
 position = Vector2(4504, 980)
@@ -525,28 +523,28 @@ region_enabled = true
 region_rect = Rect2(86.9326, 500.794, 719.843, 666.023)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-position = Vector2(12560, -272)
+position = Vector2(12614, -16)
 scale = Vector2(3.16, 3.16)
 texture = ExtResource("12_4x831")
 region_enabled = true
 region_rect = Rect2(86.9326, 500.794, 719.843, 666.023)
 
 [node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
-position = Vector2(15278, 1470)
+position = Vector2(15964, 1295)
 scale = Vector2(3.16, 3.16)
 texture = ExtResource("12_4x831")
 region_enabled = true
 region_rect = Rect2(86.9326, 500.794, 719.843, 666.023)
 
 [node name="Sprite2D4" type="Sprite2D" parent="Node2D"]
-position = Vector2(14766, -4.00098)
+position = Vector2(15001, 319.001)
 rotation = 2.3854
 texture = ExtResource("12_4x831")
 region_enabled = true
 region_rect = Rect2(1048.42, 118.548, 951.579, 381.383)
 
 [node name="Sprite2D5" type="Sprite2D" parent="Node2D"]
-position = Vector2(19141, 43)
+position = Vector2(17849, 231.001)
 rotation = 2.3854
 texture = ExtResource("12_4x831")
 region_enabled = true
