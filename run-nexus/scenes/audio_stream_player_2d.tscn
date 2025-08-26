@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://70pcqtm5837r"]
 
-[ext_resource type="AudioStream" uid="uid://cicenmxad44au" path="res://resources/music/erens escape theme audio.mp3" id="1_ax11k"]
+[ext_resource type="AudioStream" uid="uid://bpgmme2ebssor" path="res://resources/music/After the End.mp3" id="1_4mxkh"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
-stream = ExtResource("1_ax11k")
+stream = ExtResource("1_4mxkh")
 autoplay = true
 bus = &"Music"
+parameters/looping = true

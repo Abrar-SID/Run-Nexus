@@ -1,8 +1,10 @@
-[gd_scene load_steps=93 format=3 uid="uid://bca4ihx55b5p2"]
+[gd_scene load_steps=95 format=3 uid="uid://bca4ihx55b5p2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_148j1"]
 [ext_resource type="Texture2D" uid="uid://bhoj6d1utri4t" path="res://resources/sprites/character sprite.png" id="2_re3rp"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="3_6yyc8"]
+[ext_resource type="AudioStream" uid="uid://bchc3fxod6nr6" path="res://resources/music/667293__pekena_larva__voc_male_jump_01.wav" id="4_3l30h"]
+[ext_resource type="AudioStream" uid="uid://fw55c6vkc3vh" path="res://resources/music/107624__stintx__running02.wav" id="5_jgw5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlibv"]
 size = Vector2(12.8571, 22.6415)
@@ -671,10 +673,12 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "running_sound")]
 z_index = 5
-scale = Vector2(0.08, 0.115)
+scale = Vector2(0.0400008, 0.0575011)
 script = ExtResource("1_148j1")
+jump_sound = NodePath("JumpSoundPlayer")
+running_sound = NodePath("RunningSoundPlayer")
 
 [node name="GeneralCollision" type="CollisionShape2D" parent="."]
 scale = Vector2(17.5, 13.8261)
@@ -730,10 +734,19 @@ target_position = Vector2(100, 0)
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(12.5, 8.69565)
 zoom = Vector2(1.8, 1.8)
+limit_left = 0
+limit_top = 0
+limit_bottom = 720
 position_smoothing_enabled = true
 position_smoothing_speed = 50.0
 drag_vertical_enabled = true
 script = ExtResource("3_6yyc8")
+
+[node name="JumpSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3l30h")
+
+[node name="RunningSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jgw5w")
 
 [connection signal="area_entered" from="LethalDetector" to="." method="_on_lethal_entered"]
 [connection signal="area_entered" from="ZoneDetector" to="." method="_on_zones_entered"]

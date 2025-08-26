@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var jump_sound: Node
+@export var running_sound: Node
+
 #NODES
 @onready var camera: Camera2D = $Camera2D
 @onready var head_dector_left: RayCast2D = $HeadDectorLeft
@@ -8,17 +11,21 @@ extends CharacterBody2D
 @onready var wall_detector_right: RayCast2D = $WallDetectorRight
 @onready var general_collision: CollisionShape2D = $GeneralCollision
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var jump_sound_player: AudioStreamPlayer = $JumpSoundPlayer
+@onready var running_sound_player: AudioStreamPlayer = $RunningSoundPlayer
+
+
 
 
 #CONSTANTS
-const JUMP_VELOCITY = -400.0
-const WALL_JUMP_VELOCITY = -400.0
-const WALL_SLIDE_SPEED = 100.0
+const JUMP_VELOCITY = -300.0
+const WALL_JUMP_VELOCITY = -300.0
+const WALL_SLIDE_SPEED = 50.0
 const WALL_SLIDE_FRICTION = 2000.0
 const WALL_JUMP_LOCK_FRAMES = 10
 
 #VARIABLES
-var speed= 250.0
+var speed= 200.0
 var current_jump_animation = "falling"
 var in_sprintzone= false
 var wall_jump_frames = 0
@@ -44,6 +51,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		if Input.is_action_just_pressed("jump") and is_on_floor() and not in_sprintzone:
 			velocity.y = JUMP_VELOCITY
+			jump_sound.play()
 			
 			# Idle jump handling
 			if velocity.x == 0:
@@ -86,6 +94,7 @@ func _physics_process(delta: float) -> void:
 				animated_sprite.play("idle")
 			else:
 				animated_sprite.play("run")
+				running_sound.play()
 
 
 	if wall_jump_frames == 0:
