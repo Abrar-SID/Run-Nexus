@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://31x65ma23n23"]
+[gd_scene load_steps=4 format=3 uid="uid://31x65ma23n23"]
 
 [ext_resource type="Texture2D" uid="uid://26d1r10uud6t" path="res://resources/sprites/cartoon-explosion-animation-frames.png" id="1_qf4a4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xl55y"]
 size = Vector2(32, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_40kop"]
 
 [node name="Obstacle1" type="Area2D"]
 metadata/lethal = true
@@ -19,3 +21,7 @@ scale = Vector2(0.12252, 0.12252)
 texture = ExtResource("1_qf4a4")
 region_enabled = true
 region_rect = Rect2(844.318, 581.17, 459.498, 482.283)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_40kop")

@@ -570,6 +570,61 @@ texture = ExtResource("2_7tgkg")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="finishMenu" type="MarginContainer" parent="."]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="finishMenu"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FinishTitle" type="MarginContainer" parent="finishMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="finishMenu/FinishTitle"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 120
+text = "!!! FINISHED !!!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="finishMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="finishMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="continueButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "LVL 2 Coming SOon..."
+
+[node name="restartButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "RETRY"
+
+[node name="levelSelectionButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
+
 [node name="settingsMenu" type="MarginContainer" parent="."]
 visible = false
 offset_right = 1282.0
@@ -638,60 +693,6 @@ theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 50
 text = "Music"
 horizontal_alignment = 1
-
-[node name="finishMenu" type="MarginContainer" parent="settingsMenu"]
-visible = false
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="settingsMenu/finishMenu"]
-layout_mode = 2
-color = Color(0, 0, 0, 1)
-
-[node name="FinishTitle" type="MarginContainer" parent="settingsMenu/finishMenu"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 50
-
-[node name="Label" type="Label" parent="settingsMenu/finishMenu/FinishTitle"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 120
-text = "!!! FINISHED !!!"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="settingsMenu/finishMenu"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_top = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="settingsMenu/finishMenu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="continueButton" type="Button" parent="settingsMenu/finishMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 100)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 50
-text = "LVL 2 Coming SOon..."
-
-[node name="restartButton" type="Button" parent="settingsMenu/finishMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 100)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 50
-text = "RETRY"
-
-[node name="levelSelectionButton" type="Button" parent="settingsMenu/finishMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 100)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 50
-text = "EXIT"
 
 [node name="homeToSettingsMenu" type="MarginContainer" parent="."]
 visible = false
@@ -777,9 +778,9 @@ horizontal_alignment = 1
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/QuitButtom" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="ControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer/toggleControlsMenuButton" to="." method="_on_toggle_controls_menu_button_pressed"]
 [connection signal="pressed" from="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer/toggleHomeControlsMenuButton" to="." method="_on_toggle_home_controls_menu_button_pressed"]
+[connection signal="pressed" from="finishMenu/MarginContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="finishMenu/MarginContainer/VBoxContainer/levelSelectionButton" to="." method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="settingsMenu/MarginContainer/VBoxContainer/AudioControl" to="settingsMenu/MarginContainer/VBoxContainer/AudioControl" method="_on_value_changed"]
 [connection signal="pressed" from="settingsMenu/MarginContainer/VBoxContainer/backToPauseButton" to="." method="_on_toggle_settinng_button_pressed"]
-[connection signal="pressed" from="settingsMenu/finishMenu/MarginContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="settingsMenu/finishMenu/MarginContainer/VBoxContainer/levelSelectionButton" to="." method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="homeToSettingsMenu/MarginContainer/VBoxContainer/AudioControl" to="homeToSettingsMenu/MarginContainer/VBoxContainer/AudioControl" method="_on_value_changed"]
 [connection signal="pressed" from="homeToSettingsMenu/MarginContainer/VBoxContainer/backToOptionsButton" to="." method="_on_toggle_home_to_settings_button_pressed"]
