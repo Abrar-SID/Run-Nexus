@@ -3,6 +3,8 @@ extends Node2D
 @onready var player: CharacterBody2D = $CharacterBody2D
 @onready var black_rect: ColorRect = $CanvasLayer/ColorRect
 @onready var ui: Node2D = $CanvasLayer/generalUI
+@onready var level_end: Area2D = $levelEnd
+
 
 var FADE_STARTED = false
 
@@ -19,17 +21,14 @@ func _on_level_end_body_entered(body: Node2D) -> void:
 		if not FADE_STARTED:
 			FADE_STARTED = true
 			start_fade()
+
 			
 		
 func start_fade() -> void:
 	black_rect.visible = true
-	black_rect.modulate.a = 0.0
+	black_rect.modulate.a = 1.0
+	after_fade()
 	
-	var tween = create_tween()
-	
-	tween.tween_property(black_rect, "modulate:a", 1.0, fade_time)
-	tween.tween_callback(func() -> void:
-		$CanvasLayer/generalUI/finishMenu.visible = true
-		$CanvasLayer/generalUI/inGameUI.visible = false
-		player.set_physics_process(false)
-	)
+
+func after_fade() -> void:
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/ui.tscn")

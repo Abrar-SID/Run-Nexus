@@ -555,7 +555,7 @@ region_enabled = true
 region_rect = Rect2(1048.42, 118.548, 951.579, 381.383)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_nk3fm")]
-position = Vector2(113, 248)
+position = Vector2(7820, 80)
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 show_behind_parent = true
