@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioStreamPlayer2d="*res://scenes/audio_stream_player_2d.tscn"
+Transition="*res://scenes/transition_canvas_layer.tscn"
 
 [display]
 

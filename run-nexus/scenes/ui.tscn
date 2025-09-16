@@ -26,7 +26,7 @@ fill_from = Vector2(1, 0)
 gradient = SubResource("Gradient_g6lhe")
 fill_to = Vector2(0.0785714, 0)
 
-[node name="generalUI" type="Node2D" node_paths=PackedStringArray("pause_menu", "game_ui", "controls_menu", "options_menu", "home_menu", "home_controls_menu", "settings", "home_settings")]
+[node name="generalUI" type="Node2D" node_paths=PackedStringArray("pause_menu", "game_ui", "controls_menu", "options_menu", "home_menu", "home_controls_menu", "settings", "home_settings", "finish_menu")]
 script = ExtResource("1_2mgxj")
 pause_menu = NodePath("PauseMenuScreen")
 game_ui = NodePath("inGameUI")
@@ -36,6 +36,7 @@ home_menu = NodePath("HomeMenuContainer")
 home_controls_menu = NodePath("HomeToControlsMenuContainer")
 settings = NodePath("settingsMenu")
 home_settings = NodePath("homeToSettingsMenu")
+finish_menu = NodePath("finishMenu")
 
 [node name="HomeMenuContainer" type="MarginContainer" parent="."]
 offset_right = 1281.0

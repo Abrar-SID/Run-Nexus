@@ -4,7 +4,6 @@
 
 [node name="TransitionCanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_gxuf0")
-fade_time = null
 
 [node name="FadeRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1280, 720)

@@ -8,6 +8,9 @@ extends Node2D
 @export var home_controls_menu : MarginContainer
 @export var settings : MarginContainer
 @export var home_settings : MarginContainer
+@export var finish_menu : MarginContainer
+
+
 
 var gameplay_scenes = ["level_1"]
 
@@ -21,6 +24,7 @@ func _ready():
 	else:
 		home_menu.visible = true
 		game_ui.visible = false
+	Transition.fade_in()
 
 
 func toggle_visibility(object) ->void:
@@ -28,6 +32,7 @@ func toggle_visibility(object) ->void:
 		object.visible = false
 	else:
 		object.visible = true
+	Transition.fade_in()
 
 
 func _on_toggle_pause_menu_button_pressed() -> void:
@@ -73,3 +78,7 @@ func _on_toggle_home_to_settings_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
+	
+
+func level_finished_menu() -> void:
+	pass

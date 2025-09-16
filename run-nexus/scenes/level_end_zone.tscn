@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bgjl5cm4s5qiv"]
+
+[node name="LevelEndZone" type="Area2D"]
+metadata/level_end = true
