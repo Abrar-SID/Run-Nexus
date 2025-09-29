@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 
-@export var fade_time: float = 0.8
+@export var fade_time: float = 1.0
+@export var black_pause: float = 0.5
 
 @onready var fade_rect: ColorRect = $FadeRect
 
@@ -18,7 +19,12 @@ func fade_to_scene(path: String) -> void:
 	fade_rect.modulate.a = 0.0
 
 	var tween = create_tween()
+	
+	# Fade out to black
 	tween.tween_property(fade_rect, "modulate:a", 1.0, fade_time)
+	# Pause while screen is black
+	tween.tween_interval(black_pause)
+	# Switch of scenes
 	tween.tween_callback(func():
 		get_tree().change_scene_to_file(path)
 		fade_in()

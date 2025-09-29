@@ -26,7 +26,7 @@ fill_from = Vector2(1, 0)
 gradient = SubResource("Gradient_g6lhe")
 fill_to = Vector2(0.0785714, 0)
 
-[node name="generalUI" type="Node2D" node_paths=PackedStringArray("pause_menu", "game_ui", "controls_menu", "options_menu", "home_menu", "home_controls_menu", "settings", "home_settings", "finish_menu")]
+[node name="generalUI" type="Node2D" node_paths=PackedStringArray("pause_menu", "game_ui", "controls_menu", "options_menu", "home_menu", "home_controls_menu", "settings", "home_settings", "finish_menu_1", "finish_menu_2", "finish_menu_3", "finish_menu_4")]
 script = ExtResource("1_2mgxj")
 pause_menu = NodePath("PauseMenuScreen")
 game_ui = NodePath("inGameUI")
@@ -36,7 +36,10 @@ home_menu = NodePath("HomeMenuContainer")
 home_controls_menu = NodePath("HomeToControlsMenuContainer")
 settings = NodePath("settingsMenu")
 home_settings = NodePath("homeToSettingsMenu")
-finish_menu = NodePath("finishMenu")
+finish_menu_1 = NodePath("FinishMenuLevel1")
+finish_menu_2 = NodePath("FinishMenuLevel2")
+finish_menu_3 = NodePath("FinishMenuLevel3")
+finish_menu_4 = NodePath("FinishMenuLevel4")
 
 [node name="HomeMenuContainer" type="MarginContainer" parent="."]
 offset_right = 1281.0
@@ -571,61 +574,6 @@ texture = ExtResource("2_7tgkg")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="finishMenu" type="MarginContainer" parent="."]
-visible = false
-offset_right = 1280.0
-offset_bottom = 720.0
-
-[node name="ColorRect" type="ColorRect" parent="finishMenu"]
-layout_mode = 2
-color = Color(0, 0, 0, 1)
-
-[node name="FinishTitle" type="MarginContainer" parent="finishMenu"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 50
-
-[node name="Label" type="Label" parent="finishMenu/FinishTitle"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 120
-text = "!!! FINISHED !!!"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="finishMenu"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_top = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="finishMenu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="continueButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 100)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 50
-text = "LVL 2 Coming SOon..."
-
-[node name="restartButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 100)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 50
-text = "RETRY"
-
-[node name="levelSelectionButton" type="Button" parent="finishMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 100)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 50
-text = "EXIT"
-
 [node name="settingsMenu" type="MarginContainer" parent="."]
 visible = false
 offset_right = 1282.0
@@ -764,6 +712,226 @@ theme_override_font_sizes/font_size = 50
 text = "Music"
 horizontal_alignment = 1
 
+[node name="FinishMenuLevel1" type="MarginContainer" parent="."]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="FinishMenuLevel1"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FinishTitle" type="MarginContainer" parent="FinishMenuLevel1"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="FinishMenuLevel1/FinishTitle"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 120
+text = "!!! FINISHED !!!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="FinishMenuLevel1"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FinishMenuLevel1/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="continueLevel2Button" type="Button" parent="FinishMenuLevel1/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "Start LVL 2"
+
+[node name="restartButton" type="Button" parent="FinishMenuLevel1/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "RETRY"
+
+[node name="levelSelectionButton" type="Button" parent="FinishMenuLevel1/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
+
+[node name="FinishMenuLevel2" type="MarginContainer" parent="."]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="FinishMenuLevel2"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FinishTitle" type="MarginContainer" parent="FinishMenuLevel2"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="FinishMenuLevel2/FinishTitle"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 120
+text = "!!! FINISHED !!!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="FinishMenuLevel2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FinishMenuLevel2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="ContinueLevel3Button" type="Button" parent="FinishMenuLevel2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "Start lvl 3"
+
+[node name="restartButton" type="Button" parent="FinishMenuLevel2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "RETRY"
+
+[node name="levelSelectionButton" type="Button" parent="FinishMenuLevel2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
+
+[node name="FinishMenuLevel3" type="MarginContainer" parent="."]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="FinishMenuLevel3"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FinishTitle" type="MarginContainer" parent="FinishMenuLevel3"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="FinishMenuLevel3/FinishTitle"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 120
+text = "!!! FINISHED !!!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="FinishMenuLevel3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FinishMenuLevel3/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="ContinueLevel4Button" type="Button" parent="FinishMenuLevel3/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "Start lvl 4"
+
+[node name="restartButton" type="Button" parent="FinishMenuLevel3/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "RETRY"
+
+[node name="levelSelectionButton" type="Button" parent="FinishMenuLevel3/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
+
+[node name="FinishMenuLevel4" type="MarginContainer" parent="."]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="FinishMenuLevel4"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FinishTitle" type="MarginContainer" parent="FinishMenuLevel4"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="FinishMenuLevel4/FinishTitle"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 120
+text = "!!! FINISHED !!!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="FinishMenuLevel4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FinishMenuLevel4/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="ContinueHomeButton" type="Button" parent="FinishMenuLevel4/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "RETURN HOME"
+
+[node name="restartButton" type="Button" parent="FinishMenuLevel4/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "RETRY"
+
+[node name="levelSelectionButton" type="Button" parent="FinishMenuLevel4/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 50
+text = "EXIT"
+
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/startGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/toggleOptionMenuButton" to="." method="_on_toggle_option_menu_button_pressed"]
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/ExitButton" to="." method="_on_exit_button_pressed"]
@@ -779,9 +947,19 @@ horizontal_alignment = 1
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/QuitButtom" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="ControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer/toggleControlsMenuButton" to="." method="_on_toggle_controls_menu_button_pressed"]
 [connection signal="pressed" from="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer/toggleHomeControlsMenuButton" to="." method="_on_toggle_home_controls_menu_button_pressed"]
-[connection signal="pressed" from="finishMenu/MarginContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="finishMenu/MarginContainer/VBoxContainer/levelSelectionButton" to="." method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="settingsMenu/MarginContainer/VBoxContainer/AudioControl" to="settingsMenu/MarginContainer/VBoxContainer/AudioControl" method="_on_value_changed"]
 [connection signal="pressed" from="settingsMenu/MarginContainer/VBoxContainer/backToPauseButton" to="." method="_on_toggle_settinng_button_pressed"]
 [connection signal="value_changed" from="homeToSettingsMenu/MarginContainer/VBoxContainer/AudioControl" to="homeToSettingsMenu/MarginContainer/VBoxContainer/AudioControl" method="_on_value_changed"]
 [connection signal="pressed" from="homeToSettingsMenu/MarginContainer/VBoxContainer/backToOptionsButton" to="." method="_on_toggle_home_to_settings_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel1/MarginContainer/VBoxContainer/continueLevel2Button" to="." method="_on_continue_level_2_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel1/MarginContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel1/MarginContainer/VBoxContainer/levelSelectionButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel2/MarginContainer/VBoxContainer/ContinueLevel3Button" to="." method="_on_continue_level_3_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel2/MarginContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel2/MarginContainer/VBoxContainer/levelSelectionButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel3/MarginContainer/VBoxContainer/ContinueLevel4Button" to="." method="_on_continue_level_4_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel3/MarginContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel3/MarginContainer/VBoxContainer/levelSelectionButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel4/MarginContainer/VBoxContainer/ContinueHomeButton" to="." method="_on_continue_home_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel4/MarginContainer/VBoxContainer/restartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="FinishMenuLevel4/MarginContainer/VBoxContainer/levelSelectionButton" to="." method="_on_quit_button_pressed"]

@@ -733,13 +733,13 @@ target_position = Vector2(100, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(12.5, 8.69565)
-zoom = Vector2(1.8, 1.8)
+zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
 limit_bottom = 720
+limit_smoothed = true
 position_smoothing_enabled = true
-position_smoothing_speed = 50.0
-drag_vertical_enabled = true
+position_smoothing_speed = 7.0
 script = ExtResource("3_6yyc8")
 
 [node name="JumpSoundPlayer" type="AudioStreamPlayer" parent="."]
