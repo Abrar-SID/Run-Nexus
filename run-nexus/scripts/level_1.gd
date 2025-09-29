@@ -5,6 +5,4 @@ extends Node2D
 
 func _on_level_end_zone_body_entered(body: Node2D) -> void:
 	if body == player:
-		player.set_physics_process(false)
-		player.velocity = Vector2.ZERO
 		ui.level_finished_menu_1()

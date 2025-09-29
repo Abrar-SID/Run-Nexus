@@ -13,8 +13,10 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var jump_sound_player: AudioStreamPlayer = $JumpSoundPlayer
 @onready var running_sound_player: AudioStreamPlayer = $RunningSoundPlayer
-
-
+@onready var sliding_sound_player: AudioStreamPlayer = $SlidingSoundPlayer
+@onready var rolling_sound_player: AudioStreamPlayer = $RollingSoundPlayer
+@onready var landing_sound_player: AudioStreamPlayer = $LandingSoundPlayer
+@onready var wall_jump_timer: Timer = $WallJumpTimer
 
 
 #CONSTANTS
@@ -23,6 +25,7 @@ const WALL_JUMP_VELOCITY = -300.0
 const WALL_SLIDE_SPEED = 50.0
 const WALL_SLIDE_FRICTION = 2000.0
 const WALL_JUMP_LOCK_FRAMES = 10
+const WALL_JUMP_COOLDOWN = 0.25
 
 #VARIABLES
 var speed= 200.0
@@ -33,12 +36,13 @@ var is_wall_sliding = false
 var jump_zone_animation: String = ""
 var wall_jump_press_count = 0
 var is_rolling: bool = false
+var was_on_floor: bool = false
+var last_wall_jump_time: float = -1.0
 
 
 # GENERAL PHYSICS
 func _physics_process(delta: float) -> void:
-
-	# Add gravity.
+	# Adding gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		animated_sprite.play(current_jump_animation)
@@ -46,12 +50,15 @@ func _physics_process(delta: float) -> void:
 
 	handle_wall_slide(delta)
 
-
-	# Handle jump.
+	if is_on_floor() and not was_on_floor:
+		landing_sound_player.play()
+	was_on_floor = is_on_floor()
+	
+	# Handling jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		if Input.is_action_just_pressed("jump") and is_on_floor() and not in_sprintzone:
+		if not in_sprintzone:
 			velocity.y = JUMP_VELOCITY
-			jump_sound.play()
+			jump_sound_player.play()
 			
 			# Idle jump handling
 			if velocity.x == 0:
@@ -65,15 +72,16 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor() and not Input.is_action_just_pressed("jump") and not is_wall_sliding:
 		animated_sprite.play("falling")
 
-
+	# Handling roll
 	if Input.is_action_just_pressed("roll") and not is_rolling and is_on_floor():
 		is_rolling = true
 		general_collision.disabled = true
 		animated_sprite.play("roll")
+		rolling_sound_player.play()
+
 
 	# Movement: Get the input direction: -1, 0, 1
 	var direction := Input.get_axis("move_back" , "move_front")
-
 
 	if wall_jump_frames > 0:
 		wall_jump_frames -= 1
@@ -89,14 +97,21 @@ func _physics_process(delta: float) -> void:
 
 
 	if is_on_floor():
-		if is_on_floor() and not is_wall_sliding:
+		if not is_wall_sliding:
 			if direction == 0:
 				animated_sprite.play("idle")
+				if running_sound_player.playing:
+					running_sound_player.stop()
 			else:
 				animated_sprite.play("run")
-				running_sound.play()
+				if not running_sound_player.playing:
+					running_sound_player.play()
+	else:
+		if running_sound_player.playing:
+			running_sound_player.stop()
+				
 
-
+	# Velocity changes
 	if wall_jump_frames == 0:
 		if in_sprintzone and is_on_floor():
 			velocity.x = speed
@@ -117,15 +132,17 @@ func _physics_process(delta: float) -> void:
 
 # WALL SLIDING
 func handle_wall_slide(delta: float) -> void:
+	var was_sliding = is_wall_sliding
 	is_wall_sliding = false
 
 	if is_on_floor() or wall_jump_frames > 0:
+		if was_sliding and sliding_sound_player:
+			sliding_sound_player.stop()
 		return
 
 
 	var on_left = wall_detector_left.is_colliding()
 	var on_right = wall_detector_right.is_colliding()
-	
 	var pressing_left = Input.is_action_pressed("move_back")
 	var pressing_right = Input.is_action_pressed("move_front")
 
@@ -133,14 +150,18 @@ func handle_wall_slide(delta: float) -> void:
 	# Add stick to the wall mechanics
 	if (on_left or on_right) and velocity.y >= 0.0:
 		is_wall_sliding = true
-		animated_sprite.play("wall_climbing")
+		animated_sprite.play("wall_sliding")
 		
+		if not was_sliding and not sliding_sound_player.playing:
+			sliding_sound_player.play()
 		
 		if ((on_left and pressing_left) or (on_right and pressing_right)):
 			velocity.y = move_toward(velocity.y, 0.0, WALL_SLIDE_FRICTION * delta)
 		else:
 			velocity.y = move_toward(velocity.y, WALL_SLIDE_SPEED, WALL_SLIDE_FRICTION * delta)
-		
+	else:
+		if was_sliding and sliding_sound_player.playing:
+			sliding_sound_player.stop()
 
 
 
@@ -149,7 +170,6 @@ func handle_wall_slide(delta: float) -> void:
 func handle_walljump() -> void:
 
 	if is_on_floor() or in_sprintzone:
-		wall_jump_press_count = 0
 		return
 
 
@@ -158,18 +178,13 @@ func handle_walljump() -> void:
 
 
 	# Add jump press counting system
+	if Input.is_action_just_pressed("jump") and (on_left_wall or on_right_wall) and not wall_jump_timer.is_stopped():
+		return
 	if Input.is_action_just_pressed("jump") and (on_left_wall or on_right_wall):
-		wall_jump_press_count += 1
-
-
-		# Add double press wall jump mechanic
-		if wall_jump_press_count >= 2:
 			velocity.y = WALL_JUMP_VELOCITY
 			animated_sprite.play("wall_climbing")
-			wall_jump_press_count = 0
-			return
-
-		is_wall_sliding = false
+			is_wall_sliding =false
+			wall_jump_timer.start()
 
 
 
@@ -222,7 +237,7 @@ func _on_lethal_entered(area: Area2D) -> void:
 
 # RESTART
 func _reload_scene() -> void:
-	get_tree().reload_current_scene()
+	Transition.fade_to_scene(get_tree().current_scene.scene_file_path)
 
 
 # CHECKING ANIMATION CHANGES

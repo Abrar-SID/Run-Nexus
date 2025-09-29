@@ -6,6 +6,7 @@
 script = ExtResource("1_gxuf0")
 
 [node name="FadeRect" type="ColorRect" parent="."]
+z_index = 100
 custom_minimum_size = Vector2(1280, 720)
 offset_right = 40.0
 offset_bottom = 40.0
