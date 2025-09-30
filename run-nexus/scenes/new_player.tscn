@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://b1x8hceon3kv1"]
+[gd_scene load_steps=50 format=3 uid="uid://b1x8hceon3kv1"]
 
 [ext_resource type="Script" path="res://scripts/new_player.gd" id="1_xq8hx"]
 [ext_resource type="Texture2D" uid="uid://cre63qd6w4t1q" path="res://resources/sprites/character sprite trial.png" id="2_6cyrq"]
@@ -8,9 +8,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5yjt"]
 size = Vector2(84, 120)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wifo1"]
-size = Vector2(84, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_klwkx"]
 size = Vector2(83.3287, 91.6666)
@@ -379,23 +376,17 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "land_sound", "run_sound", "wall_slide_sound", "roll_sound")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "land_sound", "run_sound", "wall_slide_sound")]
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_xq8hx")
 jump_sound = NodePath("Sounds/JumpSoundPlayer")
 land_sound = NodePath("Sounds/LandSoundPlayer")
 run_sound = NodePath("Sounds/RunSoundPlayer")
 wall_slide_sound = NodePath("Sounds/WallSlideSoundPlayer")
-roll_sound = NodePath("Sounds/RollSoundPlayer")
 
 [node name="GeneralCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_i5yjt")
-
-[node name="RollingCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 26.5)
-shape = SubResource("RectangleShape2D_wifo1")
-disabled = true
 
 [node name="LeftWallDetector" type="RayCast2D" parent="."]
 position = Vector2(0, 45)

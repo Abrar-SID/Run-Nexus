@@ -1,79 +1,64 @@
 extends CharacterBody2D
 
-#NODES
+# NODES
 @onready var camera: Camera2D = $Camera2D
-@onready var head_dector_left: RayCast2D = $HeadDectorLeft
-@onready var head_dector_right: RayCast2D = $HeadDectorRight
 @onready var wall_detector_left: RayCast2D = $WallDetectorLeft
 @onready var wall_detector_right: RayCast2D = $WallDetectorRight
-
 @onready var general_collision: CollisionShape2D = $GeneralCollision
-@onready var roll_collision: CollisionShape2D = $RollCollision
-
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
-
-@onready var jump_sound_player: AudioStreamPlayer = $JumpSoundPlayer
-@onready var running_sound_player: AudioStreamPlayer = $RunningSoundPlayer
-@onready var sliding_sound_player: AudioStreamPlayer = $SlidingSoundPlayer
-@onready var rolling_sound_player: AudioStreamPlayer = $RollingSoundPlayer
-@onready var landing_sound_player: AudioStreamPlayer = $LandingSoundPlayer
-
+@onready var jump_sound_player: AudioStreamPlayer = $Sounds/JumpSoundPlayer
+@onready var running_sound_player: AudioStreamPlayer = $Sounds/RunningSoundPlayer
+@onready var sliding_sound_player: AudioStreamPlayer = $Sounds/SlidingSoundPlayer
+@onready var landing_sound_player: AudioStreamPlayer = $Sounds/LandingSoundPlayer
 @onready var wall_jump_timer: Timer = $WallJumpTimer
+@onready var death_cooldown: Timer = $DeathCooldown
 
-
-#CONSTANTS
-const JUMP_VELOCITY = -300.0
-const WALL_JUMP_VELOCITY = -300.0
+# CONSTANTS
+const JUMP_VELOCITY = -350.0
+const WALL_JUMP_VELOCITY = -250.0
 const WALL_SLIDE_SPEED = 50.0
 const WALL_SLIDE_FRICTION = 2000.0
-const WALL_JUMP_LOCK_FRAMES = 10
-const WALL_JUMP_COOLDOWN = 0.25
 
-#VARIABLES
+# VARIABLES
 var speed= 200.0
 var in_sprintzone= false
 var wall_jump_frames = 0
 var is_wall_sliding = false
-var is_rolling: bool = false
+var jump_zone_animation: String = ""
 var was_on_floor: bool = false
+var is_death: bool = false
 
 
 # GENERAL PHYSICS
 func _physics_process(delta: float) -> void:
-	# Adding gravity.
+	if is_death:
+		return
+		
+	# GRAVITY
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-
 	handle_wall_slide(delta)
 
+	# LANDING
 	if is_on_floor() and not was_on_floor:
 		landing_sound_player.play()
 		animated_sprite.play("landing")
 	was_on_floor = is_on_floor()
 	
-	# Handling jump
+	# JUMPS
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		jump_sound_player.play()
 			
-		# Idle jump handling
+		# IDLE JUMP
 		if Input.get_axis("move_back", "move_front") == 0:
 			animated_sprite.play("idle_jump")
 		else:
 			animated_sprite.play("jump_1")
-	
+	# FALLING
 	if not is_on_floor() and not is_wall_sliding and velocity.y > 0:
 		animated_sprite.play("falling")
-
-	# Handling roll
-	if Input.is_action_just_pressed("roll") and not is_rolling and is_on_floor():
-		is_rolling = true
-		general_collision.disabled = true
-		roll_collision.disabled = false
-		animated_sprite.play("roll")
-		rolling_sound_player.play()
-
 
 	# Movement: Get the input direction: -1, 0, 1
 	var direction := Input.get_axis("move_back" , "move_front")
@@ -90,8 +75,8 @@ func _physics_process(delta: float) -> void:
 			elif direction > 0:
 				animated_sprite.flip_h = false
 
-	# Idle / Run
-	if is_on_floor() and is_rolling and not is_wall_sliding:
+	# IDLE/RUN ANIMATION & SOUND
+	if is_on_floor() and not is_wall_sliding:
 		if direction == 0:
 			animated_sprite.play("idle")
 			if running_sound_player.playing:
@@ -105,11 +90,13 @@ func _physics_process(delta: float) -> void:
 			running_sound_player.stop()
 
 	# Velocity changes
+	var target_speed: float = 200.0
 	if wall_jump_frames == 0:
 		if in_sprintzone and is_on_floor():
-			velocity.x = speed
+			target_speed = 1000.0
+			velocity.x = move_toward(velocity.x, target_speed, abs(target_speed - 200) * delta)
 		else:
-			if direction:
+			if direction != 0:
 				velocity.x = direction * speed
 			else:
 				velocity.x = move_toward(velocity.x, 0, speed)
@@ -122,7 +109,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-
 # WALL SLIDING
 func handle_wall_slide(delta: float) -> void:
 	var was_sliding = is_wall_sliding
@@ -133,14 +119,12 @@ func handle_wall_slide(delta: float) -> void:
 			sliding_sound_player.stop()
 		return
 
-
 	var on_left = wall_detector_left.is_colliding()
 	var on_right = wall_detector_right.is_colliding()
 	var pressing_left = Input.is_action_pressed("move_back")
 	var pressing_right = Input.is_action_pressed("move_front")
 
-
-	# Add stick to the wall mechanics
+	# WALL MECHANICS
 	if (on_left or on_right) and velocity.y >= 0.0:
 		is_wall_sliding = true
 		animated_sprite.play("wall_sliding")
@@ -155,8 +139,6 @@ func handle_wall_slide(delta: float) -> void:
 	else:
 		if was_sliding and sliding_sound_player.playing:
 			sliding_sound_player.stop()
-
-
 
 
 # WALL JUMPS
@@ -177,26 +159,21 @@ func handle_walljump() -> void:
 			wall_jump_timer.start()
 
 
-
-
 # AREA2D SIGNALS - ENTRY
 func _on_zones_entered(area: Area2D) -> void:
 	if area.has_meta("sprintzone"):
-		speed = 1000.0
+		velocity.x = move_toward(velocity.x, speed * 5, 2)
 		camera.call("start_shake")
+		camera.call("set_zoom_factor", 0.5)
 		in_sprintzone = true
-
-
+		
 	# Add multiple jump animations
 	if area.has_meta("jump_1"):
 		jump_zone_animation = "jump_1"
-
 	elif area.has_meta("jump_2"):
 		jump_zone_animation = "jump_2"
-
 	elif area.has_meta("jump_3"):
 		jump_zone_animation = "jump_3"
-
 
 
 # AREA2D SIGNALS - EXIT
@@ -206,31 +183,24 @@ func _on_zones_exited(area: Area2D) -> void:
 		speed = 200.0
 		in_sprintzone = false
 		camera.call("start_shake")
+		camera.call("set_zoom_factor", 1.0)
 
 	# Reset to default jump animation when leaving zone
 	if area.has_meta("jump_1") or area.has_meta("jump_2") or area.has_meta("jump_3"):
 		jump_zone_animation = ""
 
 
-
 # DEATH
 func _on_lethal_entered(area: Area2D) -> void:
-	
-	if area.has_meta("lethal"):
-		call_deferred("_reload_scene")
+	if area.has_meta("lethal") and not is_death:
+		is_death = true
+		Engine.time_scale = 0.3
+		velocity = Vector2.ZERO
+		animated_sprite.play("death")
+		death_cooldown.start()
 
 
-
-# RESTART
-func _reload_scene() -> void:
+# RESTART LEVEL
+func _on_death_cooldown_timeout() -> void:
+	Engine.time_scale = 1.0
 	Transition.fade_to_scene(get_tree().current_scene.scene_file_path)
-
-
-# CHECKING ANIMATION CHANGES
-func _on_animated_sprite_animation_finished() -> void:
-	if animated_sprite.animation == "roll":
-		is_rolling = false
-		general_collision.disabled = false
-		roll_collision.disabled = true
-		if is_on_floor():
-			if v

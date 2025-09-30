@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player: CharacterBody2D = $Player
+@onready var player: CharacterBody2D = $CharacterBody2D
 @onready var ui = $CanvasLayer/generalUI
 
 

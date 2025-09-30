@@ -9,7 +9,6 @@ const WALL_SLIDE_FRICTION = 2000.0
 # ==VARIABLES==
 var speed = 300.0
 var in_sprintzone: bool = false
-var is_rolling: bool = false
 var is_wall_sliding: bool = false
 var was_on_floor: bool = false
 var is_landing: bool = false
@@ -21,14 +20,12 @@ var facing_direction := 1
 @export var land_sound: Node
 @export var run_sound: Node
 @export var wall_slide_sound: Node
-@export var roll_sound: Node
 
 # ==NODES==
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var wall_left: RayCast2D = $LeftWallDetector
 @onready var wall_right: RayCast2D = $RightWallDetector
 @onready var general_collision: CollisionShape2D = $GeneralCollision
-@onready var rolling_collision: CollisionShape2D = $RollingCollision
 @onready var zone_detector: Area2D = $ZoneDetector
 @onready var wall_jump_cooldown: Timer = $Timers/WallJumpCooldown
 @onready var death_cooldown: Timer = $Timers/DeathCooldown
@@ -42,11 +39,11 @@ func _physics_process(delta: float) -> void:
 	handle_gravity(delta)
 	if not is_landing:
 		handle_jump()
-		handle_roll()
 		handle_wall_slide(delta)
 		handle_wall_jump()
 		handle_movement()
 	handle_animation()
+	move_and_slide()
 	
 	if not is_on_floor() and not falling_countdown.is_stopped():
 		pass
@@ -54,8 +51,6 @@ func _physics_process(delta: float) -> void:
 		falling_countdown.start()
 	elif is_on_floor() and falling_countdown.time_left > 0.75:
 		start_landing()
-		
-	move_and_slide()
 
 
 # ==GRAVITY==
@@ -82,15 +77,6 @@ func start_landing() -> void:
 
 func _on_landing_cooldown_timeout() -> void:
 	is_landing = false
-
-
-# ==ROLL==
-func handle_roll() -> void:
-	if Input.is_action_just_pressed("roll") and is_on_floor() and not is_rolling:
-		is_rolling = true
-		general_collision.disabled = true
-		rolling_collision.disabled = false
-		roll_sound.play()
 
 
 # ==WALL SLIDE==
@@ -169,13 +155,7 @@ func handle_movement() -> void:
 # HANDLING ANIMATION
 func handle_animation() -> void:
 	if is_on_floor():
-		if is_rolling:
-			animated_sprite.play("roll")
-			if not animated_sprite.is_playing():
-				is_rolling = false
-				general_collision.disabled = false
-				rolling_collision.disabled = true
-		elif velocity.x == 0:
+		if velocity.x == 0:
 			animated_sprite.play("idle")
 		else:
 			if in_sprintzone:
