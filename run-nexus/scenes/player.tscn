@@ -431,6 +431,7 @@ shape = SubResource("RectangleShape2D_hlibv")
 position = Vector2(0, 60.5396)
 scale = Vector2(1.12, 0.582)
 shape = SubResource("RectangleShape2D_l6cfp")
+disabled = true
 
 [node name="LethalDetector" type="Area2D" parent="."]
 visible = false
@@ -451,6 +452,8 @@ shape = SubResource("CircleShape2D_3gh1e")
 scale = Vector2(4.84115, 2.9212)
 sprite_frames = SubResource("SpriteFrames_p8ltb")
 animation = &"roll"
+frame = 7
+frame_progress = 1.0
 flip_h = true
 
 [node name="WallDetectorLeft" type="RayCast2D" parent="."]

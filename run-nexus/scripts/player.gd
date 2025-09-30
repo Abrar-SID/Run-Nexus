@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var wall_detector_left: RayCast2D = $WallDetectorLeft
 @onready var wall_detector_right: RayCast2D = $WallDetectorRight
 @onready var general_collision: CollisionShape2D = $GeneralCollision
+@onready var roll_collision: CollisionShape2D = $RollCollision
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var jump_sound_player: AudioStreamPlayer = $JumpSoundPlayer
 @onready var running_sound_player: AudioStreamPlayer = $RunningSoundPlayer
@@ -29,7 +30,7 @@ const WALL_JUMP_COOLDOWN = 0.25
 
 #VARIABLES
 var speed= 200.0
-var current_jump_animation = "falling"
+var current_jump_animation = "idle_jump"
 var in_sprintzone= false
 var wall_jump_frames = 0
 var is_wall_sliding = false
@@ -64,18 +65,22 @@ func _physics_process(delta: float) -> void:
 			if velocity.x == 0:
 				animated_sprite.play("idle_jump")
 			elif jump_zone_animation != "":
-				animated_sprite.play(jump_zone_animation)
+				current_jump_animation = jump_zone_animation
 			else:
 				animated_sprite.play("jump_1")
-				
+		else:
+			current_jump_animation = "falling"
+		animated_sprite.play(current_jump_animation)
 	
-	if not is_on_floor() and not Input.is_action_just_pressed("jump") and not is_wall_sliding:
-		animated_sprite.play("falling")
+	if not is_on_floor() and not is_wall_sliding:
+		if velocity.y > 0:
+			animated_sprite.play("falling")
 
 	# Handling roll
 	if Input.is_action_just_pressed("roll") and not is_rolling and is_on_floor():
 		is_rolling = true
 		general_collision.disabled = true
+		roll_collision.disabled = false
 		animated_sprite.play("roll")
 		rolling_sound_player.play()
 
@@ -182,7 +187,7 @@ func handle_walljump() -> void:
 		return
 	if Input.is_action_just_pressed("jump") and (on_left_wall or on_right_wall):
 			velocity.y = WALL_JUMP_VELOCITY
-			animated_sprite.play("wall_climbing")
+			animated_sprite.play("wall_jump")
 			is_wall_sliding =false
 			wall_jump_timer.start()
 
@@ -190,7 +195,6 @@ func handle_walljump() -> void:
 
 # AREA2D SIGNALS - ENTRY
 func _on_zones_entered(area: Area2D) -> void:
-
 	if area.has_meta("sprintzone"):
 		speed = 1000.0
 		camera.call("start_shake")
@@ -198,33 +202,28 @@ func _on_zones_entered(area: Area2D) -> void:
 
 
 	# Add multiple jump animations
-	if area.has_meta("jump1"):
-		camera.call("start_shake")
-		animated_sprite.play("jump_1")
+	if area.has_meta("jump_1"):
+		jump_zone_animation = "jump_1"
 
-	elif area.has_meta("jump2"):
-		camera.call("start_shake")
-		animated_sprite.play("jump_2")
+	elif area.has_meta("jump_2"):
+		jump_zone_animation = "jump_2"
 
-	elif area.has_meta("jump3"):
-		camera.call("start_shake")
-		animated_sprite.play("jump_3")
+	elif area.has_meta("jump_3"):
+		jump_zone_animation = "jump_3"
 
 
 
 # AREA2D SIGNALS - EXIT
 func _on_zones_exited(area: Area2D) -> void:
-	
 	#Rest speed when leaving zone
 	if area.has_meta("sprintzone"):
 		speed = 200.0
 		in_sprintzone = false
 		camera.call("start_shake")
 
-
 	# Reset to default jump animation when leaving zone
-	if area.has_meta("jump_ani_1") or area.has_meta("jump_ani_2") or area.has_meta("jump_ani_3"):
-		animated_sprite.play("jump_1")
+	if area.has_meta("jump_1") or area.has_meta("jump_2") or area.has_meta("jump_3"):
+		jump_zone_animation = ""
 
 
 # DEATH
@@ -245,3 +244,4 @@ func _on_animated_sprite_animation_finished() -> void:
 	if animated_sprite.animation == "roll":
 		is_rolling = false
 		general_collision.disabled = false
+		roll_collision.disabled = true
