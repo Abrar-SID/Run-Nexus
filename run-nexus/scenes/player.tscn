@@ -1,7 +1,7 @@
-[gd_scene load_steps=55 format=3 uid="uid://bca4ihx55b5p2"]
+[gd_scene load_steps=57 format=3 uid="uid://bca4ihx55b5p2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_148j1"]
-[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="3_6yyc8"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="3_6yyc8"]
 [ext_resource type="Texture2D" uid="uid://cre63qd6w4t1q" path="res://resources/sprites/character sprite trial.png" id="3_ec2cd"]
 [ext_resource type="AudioStream" uid="uid://bchc3fxod6nr6" path="res://resources/music/667293__pekena_larva__voc_male_jump_01.wav" id="4_3l30h"]
 [ext_resource type="AudioStream" uid="uid://fw55c6vkc3vh" path="res://resources/music/107624__stintx__running02.wav" id="5_jgw5w"]
@@ -105,6 +105,14 @@ region = Rect2(768, 640, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dql14"]
 atlas = ExtResource("3_ec2cd")
 region = Rect2(896, 640, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kdbe"]
+atlas = ExtResource("3_ec2cd")
+region = Rect2(640, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7ay3"]
+atlas = ExtResource("3_ec2cd")
+region = Rect2(640, 384, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wsc8"]
 atlas = ExtResource("3_ec2cd")
@@ -330,6 +338,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1kdbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7ay3")
+}],
+"loop": false,
+"name": &"landing",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_7wsc8")
 }, {
 "duration": 1.0,
@@ -415,12 +434,10 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "running_sound")]
+[node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 5
 scale = Vector2(0.0400008, 0.0575011)
 script = ExtResource("1_148j1")
-jump_sound = NodePath("JumpSoundPlayer")
-running_sound = NodePath("RunningSoundPlayer")
 
 [node name="GeneralCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-8.9422e-07, -17.391)
@@ -451,9 +468,7 @@ shape = SubResource("CircleShape2D_3gh1e")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4.84115, 2.9212)
 sprite_frames = SubResource("SpriteFrames_p8ltb")
-animation = &"roll"
-frame = 7
-frame_progress = 1.0
+animation = &"wall_sliding"
 flip_h = true
 
 [node name="WallDetectorLeft" type="RayCast2D" parent="."]
