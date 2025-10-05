@@ -1,23 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnwokinf5ch6v"]
 
-[ext_resource type="Texture2D" uid="uid://26d1r10uud6t" path="res://resources/sprites/cartoon-explosion-animation-frames.png" id="1_ysnsn"]
+[ext_resource type="Texture2D" uid="uid://ek1oawx8hr27" path="res://resources/sprites/obstacle sprites 2.png" id="1_25e4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8e31x"]
-size = Vector2(10.1351, 20)
+size = Vector2(32.4324, 33.7838)
 
 [node name="Obstacle3" type="Area2D"]
 metadata/lethal = true
 metadata/jump3 = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
+position = Vector2(2.38419e-07, 0)
 scale = Vector2(1.48, 1.48)
 shape = SubResource("RectangleShape2D_8e31x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.733128, 2)
-rotation = 1.5922
-scale = Vector2(0.165644, 0.165644)
-texture = ExtResource("1_ysnsn")
-region_enabled = true
-region_rect = Rect2(122.776, 260.168, 239.243, 163.293)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_25e4u")

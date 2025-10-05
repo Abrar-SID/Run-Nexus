@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bu648cdlaide7"]
+[gd_scene load_steps=16 format=3 uid="uid://bu648cdlaide7"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_2mgxj"]
-[ext_resource type="Texture2D" uid="uid://d3aef1ev1btxa" path="res://icon.svg" id="2_7tgkg"]
 [ext_resource type="Texture2D" uid="uid://bpijb31wnhm5y" path="res://resources/background/Frame 1.png" id="2_n8u0g"]
 [ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="3_0k41t"]
+[ext_resource type="Texture2D" uid="uid://dijaxn835s1b5" path="res://resources/sprites/run_demo.png" id="4_17vub"]
 [ext_resource type="Script" path="res://scripts/audio_control.gd" id="4_xg2c3"]
+[ext_resource type="Texture2D" uid="uid://ibeysmo1isbs" path="res://resources/sprites/jump_demo.png" id="5_miho5"]
+[ext_resource type="Texture2D" uid="uid://dpxsa4pl8exdb" path="res://resources/sprites/wall_climb_demo.png" id="6_m1cf6"]
+[ext_resource type="Texture2D" uid="uid://bumfmjc8gjdsg" path="res://resources/sprites/wall_jump_demo.png" id="7_c0gu6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sy0j"]
 texture = ExtResource("2_n8u0g")
@@ -331,10 +334,11 @@ offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="ControlsMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.796078)
+color = Color(0, 0, 0, 0.87451)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ControlsMenuContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ControlsMenuContainer/VBoxContainer"]
 layout_mode = 2
@@ -345,15 +349,15 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 30
 
 [node name="toggleControlsMenuButton" type="Button" parent="ControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 30
 text = "RETURN"
 
 [node name="Label" type="Label" parent="ControlsMenuContainer/VBoxContainer/HBoxContainer2"]
@@ -378,30 +382,27 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="ControlsMenuContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 0
 
 [node name="Label2" type="Label" parent="ControlsMenuContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 28
-text = "JFeugnvrv
-JVDnvijvrnvijv rihb ivn ejb wojrnb
-fdvnrvbrvbrvnrvnrvjirnvjf vfjobn b 
-fivhbfvubvibnrihbrbrhibrhirbvrfbir
-fvvrfgre
+text = "   Press [Right Arrow- or [D-
+   to MOVE RIGHT.
 
-bhvbrvbr
-vfdbnfivbribnrifbrhbrignrig
-fvborgirngiwrbrwvnwr
- udnvourbnvruvb
+   Press [Left Arrow- or [A-
+   to MOVE LEFT
 
-dvbvbv
-fdvbvbrofgnbouvbdsjov
-dfovnovnbouvnruogvnrorbn
+   Press [SPACE- or [Up Arrow- or [W-
+   to JUMP
 
-dfnvfovnrgovb
-duvnduovndovnov ndovb dfjob 
-vdovndfjovndfonvvodvndov dov"
+   Hold [A/D- or [Left/Right Arrows- 
+   while on wall
+   to WALL SLIDE and HOLD.
+
+   While WALL SLIDINING, press [SPACE-
+    or [W- or [Up Arrow-  to
+   WALL JUMP"
 justification_flags = 131
 uppercase = true
 
@@ -417,7 +418,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("4_17vub")
 expand_mode = 1
 stretch_mode = 4
 
@@ -425,7 +426,7 @@ stretch_mode = 4
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("5_miho5")
 expand_mode = 1
 stretch_mode = 4
 
@@ -437,7 +438,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("6_m1cf6")
 expand_mode = 1
 stretch_mode = 4
 
@@ -445,7 +446,7 @@ stretch_mode = 4
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("7_c0gu6")
 expand_mode = 1
 stretch_mode = 4
 
@@ -457,11 +458,12 @@ offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="HomeToControlsMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.490196)
+color = Color(0, 0, 0, 0.87451)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HomeToControlsMenuContainer"]
 layout_mode = 2
 theme_override_constants/separation = -10
+alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HomeToControlsMenuContainer/VBoxContainer"]
 layout_mode = 2
@@ -477,12 +479,13 @@ theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
 [node name="toggleHomeControlsMenuButton" type="Button" parent="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 30
 text = "RETURN"
+icon_alignment = 1
+expand_icon = true
 
 [node name="Label" type="Label" parent="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -496,7 +499,8 @@ uppercase = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HomeToControlsMenuContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 5
+alignment = 1
 
 [node name="Control" type="Control" parent="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -509,24 +513,22 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 28
-text = "JFeugnvrv
-JVDnvijvrnvijv rihb ivn ejb wojrnb
-fdvnrvbrvbrvnrvnrvjirnvjf vfjobn b 
-fivhbfvubvibnrihbrbrhibrhirbvrfbir
-fvvrfgre
+text = "   Press [Right Arrow- or [D-
+   to MOVE RIGHT.
 
-bhvbrvbr
-vfdbnfivbribnrifbrhbrignrig
-fvborgirngiwrbrwvnwr
- udnvourbnvruvb
+   Press [Left Arrow- or [A-
+   to MOVE LEFT
 
-dvbvbv
-fdvbvbrofgnbouvbdsjov
-dfovnovnbouvnruogvnrorbn
+   Press [SPACE- or [Up Arrow- or [W-
+   to JUMP
 
-dfnvfovnrgovb
-duvnduovndovnov ndovb dfjob 
-vdovndfjovndfonvvodvndov dov"
+   Hold [A/D- or [Left/Right Arrows- 
+   while on wall
+   to WALL SLIDE and HOLD.
+
+   While WALL SLIDINING, press [SPACE-
+    or [W- or [Up Arrow-  to
+   WALL JUMP"
 justification_flags = 131
 uppercase = true
 
@@ -542,7 +544,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("4_17vub")
 expand_mode = 1
 stretch_mode = 4
 
@@ -550,7 +552,7 @@ stretch_mode = 4
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("5_miho5")
 expand_mode = 1
 stretch_mode = 4
 
@@ -562,7 +564,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("6_m1cf6")
 expand_mode = 1
 stretch_mode = 4
 
@@ -570,7 +572,7 @@ stretch_mode = 4
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_7tgkg")
+texture = ExtResource("7_c0gu6")
 expand_mode = 1
 stretch_mode = 4
 

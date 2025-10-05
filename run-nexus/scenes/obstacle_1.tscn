@@ -1,27 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://31x65ma23n23"]
+[gd_scene load_steps=2 format=3 uid="uid://31x65ma23n23"]
 
-[ext_resource type="Texture2D" uid="uid://26d1r10uud6t" path="res://resources/sprites/cartoon-explosion-animation-frames.png" id="1_qf4a4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl55y"]
-size = Vector2(32, 30)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_40kop"]
+[ext_resource type="Texture2D" uid="uid://bc52gq32ddd4y" path="res://resources/sprites/obstacle sprites 1.png" id="1_t0yun"]
 
 [node name="Obstacle1" type="Area2D"]
 metadata/lethal = true
 metadata/jump1 = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(19, 20)
-shape = SubResource("RectangleShape2D_xl55y")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.8, 0.8)
+polygon = PackedVector2Array(-10, -15, -6, 6, 0, -15, 4, 6, 11, -15, 16, 15, -16, 15, -11, -15)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(22, 16)
-scale = Vector2(0.12252, 0.12252)
-texture = ExtResource("1_qf4a4")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_t0yun")
 region_enabled = true
-region_rect = Rect2(844.318, 581.17, 459.498, 482.283)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-sprite_frames = SubResource("SpriteFrames_40kop")
+region_rect = Rect2(-2.83716, 9.37728, 609.326, 597.243)

@@ -58,9 +58,21 @@ func _on_level_4_button_pressed() -> void:
 		move_to_world(3)
 
 
-func _on_level_start_button_pressed() -> void:
+func _on_level_1_start_button_pressed() -> void:
 	Transition.fade_to_scene("res://scenes/level_1.tscn")
 
 
 func _on_back_to_home_button_pressed() -> void:
 	Transition.fade_to_scene("res://scenes/ui.tscn")
+
+
+func _on_level_2_start_button_pressed() -> void:
+	Transition.fade_to_scene("res://scenes/level_2.tscn")
+
+
+func _on_level_3_start_button_pressed() -> void:
+	Transition.fade_to_scene("res://scenes/level_3.tscn")
+
+
+func _on_level_4_start_button_pressed() -> void:
+	Transition.fade_to_scene("res://scenes/level_4.tscn")

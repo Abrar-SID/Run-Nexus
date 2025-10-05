@@ -1,21 +1,61 @@
-[gd_scene load_steps=3 format=3 uid="uid://isly37l7d218"]
+[gd_scene load_steps=8 format=3 uid="uid://isly37l7d218"]
 
 [ext_resource type="Texture2D" uid="uid://26d1r10uud6t" path="res://resources/sprites/cartoon-explosion-animation-frames.png" id="1_0y6k6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adn12"]
-size = Vector2(23, 18)
+size = Vector2(26.5, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y376v"]
+atlas = ExtResource("1_0y6k6")
+region = Rect2(1500, 666, 500, 666)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2x6v"]
+atlas = ExtResource("1_0y6k6")
+region = Rect2(1000, 666, 500, 666)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axl2c"]
+atlas = ExtResource("1_0y6k6")
+region = Rect2(500, 666, 500, 666)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44bwp"]
+atlas = ExtResource("1_0y6k6")
+region = Rect2(0, 666, 500, 666)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_063d4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y376v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2x6v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axl2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44bwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axl2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2x6v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Obstacle2" type="Area2D"]
 metadata/lethal = true
 metadata/jump2 = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(19.5, 18)
 shape = SubResource("RectangleShape2D_adn12")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(21, 23)
-scale = Vector2(0.206406, 0.250903)
-texture = ExtResource("1_0y6k6")
-region_enabled = true
-region_rect = Rect2(1375.95, 727.26, 281.015, 277.218)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_063d4")
+autoplay = "default"
+frame_progress = 0.137927

@@ -453,6 +453,6 @@ script = ExtResource("3_fw1lj")
 
 [connection signal="timeout" from="Timers/LandingCooldown" to="." method="_on_landing_cooldown_timeout"]
 [connection signal="timeout" from="Timers/DeathCooldown" to="." method="_on_death_cooldown_timeout"]
-[connection signal="area_entered" from="ZoneDetector" to="." method="_on_lethal_entered"]
 [connection signal="area_entered" from="ZoneDetector" to="." method="_on_zone_detector_area_entered"]
+[connection signal="area_entered" from="ZoneDetector" to="." method="_on_lethal_entered"]
 [connection signal="area_exited" from="ZoneDetector" to="." method="_on_zone_detector_area_exited"]
