@@ -907,7 +907,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 150
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FinishMenuLevel4/MarginContainer"]
 layout_mode = 2
@@ -933,6 +933,19 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 50
 text = "EXIT"
+
+[node name="Label" type="Label" parent="FinishMenuLevel4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_0k41t")
+theme_override_font_sizes/font_size = 20
+text = "Product of     -     Team Backstage
+     Art by     -      Equilibrium K
+            Sounds by     -      Pakena Larva, Stintx
+      Music by     -      Rafael Krux        "
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/startGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/toggleOptionMenuButton" to="." method="_on_toggle_option_menu_button_pressed"]

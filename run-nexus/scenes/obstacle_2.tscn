@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://isly37l7d218"]
+[gd_scene load_steps=10 format=3 uid="uid://isly37l7d218"]
 
 [ext_resource type="Texture2D" uid="uid://26d1r10uud6t" path="res://resources/sprites/cartoon-explosion-animation-frames.png" id="1_0y6k6"]
 
@@ -47,6 +47,17 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_jqypn"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gwv00"]
+gradient = SubResource("Gradient_jqypn")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.518293, 0.536585)
+fill_to = Vector2(0.701219, 0.756098)
+
 [node name="Obstacle2" type="Area2D"]
 metadata/lethal = true
 metadata/jump2 = true
@@ -58,4 +69,12 @@ shape = SubResource("RectangleShape2D_adn12")
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_063d4")
 autoplay = "default"
-frame_progress = 0.137927
+frame_progress = 0.589301
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = 5
+energy = 2.0
+range_layer_min = -512
+range_layer_max = 100
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_gwv00")

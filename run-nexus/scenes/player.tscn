@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bca4ihx55b5p2"]
+[gd_scene load_steps=51 format=3 uid="uid://bca4ihx55b5p2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_148j1"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_6yyc8"]
@@ -8,9 +8,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlibv"]
 size = Vector2(14.2854, 25.1567)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6cfp"]
-size = Vector2(201.625, 327.565)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7ioc"]
 size = Vector2(16.2163, 22.2314)
@@ -379,6 +376,17 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_jm407"]
+colors = PackedColorArray(1, 1, 1, 1, 0.517184, 0.517184, 0.517184, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_60c7a"]
+gradient = SubResource("Gradient_jm407")
+width = 3072
+height = 3072
+fill = 1
+fill_from = Vector2(0.493902, 0.512195)
+fill_to = Vector2(0.682927, 0.304878)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 5
 scale = Vector2(0.0400008, 0.0575011)
@@ -388,12 +396,6 @@ script = ExtResource("1_148j1")
 position = Vector2(-8.9422e-07, -17.391)
 scale = Vector2(15.8, 13.8261)
 shape = SubResource("RectangleShape2D_hlibv")
-
-[node name="RollCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 60.5396)
-scale = Vector2(1.12, 0.582)
-shape = SubResource("RectangleShape2D_l6cfp")
-disabled = true
 
 [node name="LethalDetector" type="Area2D" parent="."]
 scale = Vector2(1.50001, 1.69565)
@@ -408,15 +410,6 @@ shape = SubResource("RectangleShape2D_h7ioc")
 scale = Vector2(59, 32.6522)
 shape = SubResource("CircleShape2D_3gh1e")
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4.84115, 2.9212)
-sprite_frames = SubResource("SpriteFrames_p8ltb")
-animation = &"death"
-autoplay = "idle"
-frame = 4
-frame_progress = 1.0
-flip_h = true
-
 [node name="WallDetectorLeft" type="RayCast2D" parent="."]
 position = Vector2(-74.9985, 78.2609)
 scale = Vector2(1, 25)
@@ -426,20 +419,6 @@ target_position = Vector2(-70, 0)
 position = Vector2(74.9985, 78.2609)
 scale = Vector2(1, 25)
 target_position = Vector2(70, 0)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(12.5, 8.69565)
-zoom = Vector2(2, 2)
-limit_left = -20
-limit_top = 0
-limit_bottom = 720
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 7.0
-drag_vertical_enabled = true
-editor_draw_limits = true
-editor_draw_drag_margin = true
-script = ExtResource("3_6yyc8")
 
 [node name="WallJumpTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -462,8 +441,38 @@ volume_db = 1.0
 
 [node name="SlidingSoundPlayer" type="AudioStreamPlayer" parent="Sounds"]
 
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4.84115, 2.9212)
+sprite_frames = SubResource("SpriteFrames_p8ltb")
+animation = &"landing"
+autoplay = "idle"
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = 5
+position = Vector2(0, -69.564)
+scale = Vector2(1, 0.724624)
+range_layer_min = -512
+range_layer_max = 100
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_60c7a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(12.5, 8.69565)
+zoom = Vector2(2, 2)
+limit_left = -20
+limit_top = 0
+limit_bottom = 720
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("3_6yyc8")
+
 [connection signal="area_entered" from="LethalDetector" to="." method="_on_lethal_entered"]
 [connection signal="area_entered" from="ZoneDetector" to="." method="_on_zones_entered"]
 [connection signal="area_exited" from="ZoneDetector" to="." method="_on_zones_exited"]
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animated_sprite_animation_finished"]
 [connection signal="timeout" from="DeathCooldown" to="." method="_on_death_cooldown_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animated_sprite_animation_finished"]

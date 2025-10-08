@@ -15,9 +15,10 @@ extends CharacterBody2D
 
 # CONSTANTS
 const JUMP_VELOCITY = -350.0
-const WALL_JUMP_VELOCITY = -250.0
+const WALL_JUMP_VELOCITY = -300.0
 const WALL_SLIDE_SPEED = 50.0
 const WALL_SLIDE_FRICTION = 2000.0
+const WALL_JUMP_PUSHBACK = 100.0
 
 # VARIABLES
 var speed= 200.0
@@ -153,10 +154,20 @@ func handle_walljump() -> void:
 	if Input.is_action_just_pressed("jump") and (on_left_wall or on_right_wall) and not wall_jump_timer.is_stopped():
 		return
 	if Input.is_action_just_pressed("jump") and (on_left_wall or on_right_wall):
-			velocity.y = WALL_JUMP_VELOCITY
-			animated_sprite.play("wall_jump")
-			is_wall_sliding =false
-			wall_jump_timer.start()
+		velocity.y = WALL_JUMP_VELOCITY
+		
+		if on_left_wall:
+			velocity.x = WALL_JUMP_PUSHBACK
+			animated_sprite.flip_h = false
+		elif on_right_wall:
+			velocity.x = -WALL_JUMP_PUSHBACK
+			animated_sprite.flip_h = true
+			
+		animated_sprite.play("wall_jump")
+		is_wall_sliding =false
+		wall_jump_frames = 10
+		wall_jump_timer.start()
+		#jump_sound_player.play()
 
 
 # AREA2D SIGNALS - ENTRY
