@@ -1,5 +1,13 @@
 extends Node2D
 
+const LEVEL_PATHS = [
+	"res://scenes/level_1.tscn",
+	"res://scenes/level_2.tscn",
+	"res://scenes/level_3.tscn",
+	"res://scenes/level_4.tscn"
+]
+const HOME_PATH = ["res://scenes/ui.tscn"]
+
 @export var pause_menu : MarginContainer
 @export var game_ui : MarginContainer
 @export var controls_menu : MarginContainer
@@ -168,16 +176,16 @@ func level_finished_menu_4() -> void:
 
 
 func _on_continue_level_2_button_pressed() -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/level_2.tscn")
+	Transition.fade_to_scene(LEVEL_PATHS[1])
 
 
 func _on_continue_level_3_button_pressed() -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/level_3.tscn")
+	Transition.fade_to_scene(LEVEL_PATHS[2])
 
 
 func _on_continue_level_4_button_pressed() -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/level_4.tscn")
+	Transition.fade_to_scene(LEVEL_PATHS[3])
 
 
 func _on_continue_home_button_pressed() -> void:
-	get_tree().call_deferred("change_scene_to_file", "res://scenes/ui.tscn")
+	Transition.fade_to_scene(LEVEL_PATHS[0])

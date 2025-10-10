@@ -6,6 +6,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	level_index = clamp(level_index, 1, 4)
 	label.text = "Level" + str(level_index)
 
 

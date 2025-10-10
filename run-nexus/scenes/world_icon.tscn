@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://3wxtqo3xrg85"]
+[gd_scene load_steps=4 format=3 uid="uid://3wxtqo3xrg85"]
 
 [ext_resource type="Script" path="res://scripts/world_icon.gd" id="1_pkmh0"]
+[ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="2_3x503"]
 [ext_resource type="Texture2D" uid="uid://bejipf0uskmi3" path="res://resources/sprites/Group 7.png" id="2_tdj7k"]
 
 [node name="WorldIcon" type="Control"]
@@ -16,6 +17,9 @@ layout_mode = 0
 offset_top = -43.0
 offset_right = 126.0
 offset_bottom = 2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_3x503")
 theme_override_font_sizes/font_size = 32
 text = "Level1"
 horizontal_alignment = 1

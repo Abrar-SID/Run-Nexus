@@ -408,7 +408,7 @@ rotation = 3.03554
 scale = Vector2(1, 3.84354)
 
 [node name="Obstacle16" parent="Obstacles" instance=ExtResource("14_7hamt")]
-position = Vector2(4021, 182)
+position = Vector2(4022, 145)
 rotation = 1.49552
 scale = Vector2(0.991639, 0.991639)
 

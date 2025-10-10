@@ -356,6 +356,8 @@ position = Vector2(-206.85, 119)
 scale = Vector2(12.1602, 15.1376)
 shape = SubResource("RectangleShape2D_pfhfl")
 
+[node name="CosmeticExplosions" type="Node2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3009, 189)
 texture = ExtResource("17_k8vem")
@@ -461,7 +463,5 @@ shadow_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="generalUI" parent="CanvasLayer" instance=ExtResource("9_cgl7m")]
-
-[node name="CosmeticExplosions" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="Level3EndArea" to="." method="_on_level_3_end_zone_body_entered"]

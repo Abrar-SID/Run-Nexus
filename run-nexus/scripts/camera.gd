@@ -1,5 +1,7 @@
 extends Camera2D
 
+const DEFAULT_SHAKE_STRENGTH: float = 20.0
+
 var shake_strength: float = 0.0
 var shake_decay: float = 20.0
 
@@ -12,10 +14,13 @@ func _ready() -> void:
 	zoom = default_zoom
 	target_zoom = zoom
 
-func start_shake(strength:float = 20.0):
+func start_shake(strength:float = DEFAULT_SHAKE_STRENGTH):
+	if strength < 0:
+		strength = abs(strength)
 	shake_strength = strength
 	
 func set_zoom_factor(factor: float):
+	factor = clamp(factor, 0.5, 0.3)
 	target_zoom = default_zoom * factor
 	
 func _process(delta: float) -> void:

@@ -11,18 +11,18 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y2rp8"]
 texture = ExtResource("2_ldq71")
 
-[node name="LevelSelection" type="Control" node_paths=PackedStringArray("player_icon", "level_1_info", "level_2_info", "level_3_info", "level_4_info")]
+[node name="LevelSelection" type="Control" node_paths=PackedStringArray("level_1_info", "level_2_info", "level_3_info", "level_4_info", "player_icon")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
 offset_right = 1281.0
 offset_bottom = 721.0
 script = ExtResource("1_yo2sw")
-player_icon = NodePath("playerIcon")
 level_1_info = NodePath("Level1Slider")
 level_2_info = NodePath("Level2Slider")
 level_3_info = NodePath("Level3Slider")
 level_4_info = NodePath("Level4Slider")
+player_icon = NodePath("playerIcon")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -37,10 +37,10 @@ offset_right = 1039.0
 offset_bottom = 193.0
 
 [node name="WorldIcon2" parent="." instance=ExtResource("1_ijb5f")]
-offset_left = 1089.0
-offset_top = 288.0
-offset_right = 1217.0
-offset_bottom = 416.0
+offset_left = 1071.0
+offset_top = 279.0
+offset_right = 1199.0
+offset_bottom = 407.0
 level_index = 2
 
 [node name="WorldIcon3" parent="." instance=ExtResource("1_ijb5f")]

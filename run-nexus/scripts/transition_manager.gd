@@ -1,11 +1,9 @@
 extends CanvasLayer
 
+@onready var fade_rect: ColorRect = $FadeRect
 
 @export var fade_time: float = 0.5
 @export var black_pause: float = 0.1
-
-@onready var fade_rect: ColorRect = $FadeRect
-
 
 
 func _ready() -> void:
@@ -32,10 +30,11 @@ func do_transition(callback: Callable) -> void:
 	tween.tween_callback(func():
 		fade_rect.visible = false
 	)
-	
-	
+
 
 func fade_to_scene(path: String) -> void:
+	if not ResourceLoader.exists(path):
+		return
 	do_transition(func():
 		get_tree().change_scene_to_file(path)
 	)

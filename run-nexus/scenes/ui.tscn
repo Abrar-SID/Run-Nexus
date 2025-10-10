@@ -715,7 +715,6 @@ text = "Music"
 horizontal_alignment = 1
 
 [node name="FinishMenuLevel1" type="MarginContainer" parent="."]
-visible = false
 offset_right = 1280.0
 offset_bottom = 720.0
 

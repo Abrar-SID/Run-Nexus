@@ -52,8 +52,8 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gwv00"]
 gradient = SubResource("Gradient_jqypn")
-width = 512
-height = 512
+width = 256
+height = 256
 fill = 1
 fill_from = Vector2(0.518293, 0.536585)
 fill_to = Vector2(0.701219, 0.756098)
@@ -76,5 +76,4 @@ z_index = 5
 energy = 2.0
 range_layer_min = -512
 range_layer_max = 100
-shadow_enabled = true
 texture = SubResource("GradientTexture2D_gwv00")

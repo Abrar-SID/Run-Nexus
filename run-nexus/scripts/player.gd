@@ -19,8 +19,11 @@ const WALL_JUMP_VELOCITY = -300.0
 const WALL_SLIDE_SPEED = 50.0
 const WALL_SLIDE_FRICTION = 2000.0
 const WALL_JUMP_PUSHBACK = 100.0
+const WALL_JUMP_FRAMES = 10
+const SPRINT_MULTIPLIER = 5.0
+const SPRINT_TWEEN_SPEED = 2.0
 
-# VARIABLES
+# VARIABLES	
 var speed= 200.0
 var in_sprintzone= false
 var wall_jump_frames = 0
@@ -62,7 +65,8 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("falling")
 
 	# Movement: Get the input direction: -1, 0, 1
-	var direction := Input.get_axis("move_back" , "move_front")
+	var direction :int = clamp(Input.get_axis("move_back", "move_front"), -1, 1)
+	delta = clamp(delta, 0.0, 0.1) # Prevent extreme delta spikes
 
 	if wall_jump_frames > 0:
 		wall_jump_frames -= 1
@@ -165,45 +169,45 @@ func handle_walljump() -> void:
 			
 		animated_sprite.play("wall_jump")
 		is_wall_sliding =false
-		wall_jump_frames = 10
+		wall_jump_frames = WALL_JUMP_FRAMES
 		wall_jump_timer.start()
-		#jump_sound_player.play()
+		jump_sound_player.play()
 
 
 # AREA2D SIGNALS - ENTRY
 func _on_zones_entered(area: Area2D) -> void:
-	if area.has_meta("sprintzone"):
-		velocity.x = move_toward(velocity.x, speed * 5, 2)
+	if area and area.has_meta("sprintzone"):
+		velocity.x = move_toward(velocity.x, speed * SPRINT_MULTIPLIER, SPRINT_TWEEN_SPEED)
 		camera.call("start_shake")
 		camera.call("set_zoom_factor", 0.5)
 		in_sprintzone = true
 		
 	# Add multiple jump animations
-	if area.has_meta("jump_1"):
+	if area and area.has_meta("jump_1"):
 		jump_zone_animation = "jump_1"
-	elif area.has_meta("jump_2"):
+	elif area and area.has_meta("jump_2"):
 		jump_zone_animation = "jump_2"
-	elif area.has_meta("jump_3"):
+	elif area and area.has_meta("jump_3"):
 		jump_zone_animation = "jump_3"
 
 
 # AREA2D SIGNALS - EXIT
 func _on_zones_exited(area: Area2D) -> void:
 	#Rest speed when leaving zone
-	if area.has_meta("sprintzone"):
+	if area and area.has_meta("sprintzone"):
 		speed = 200.0
 		in_sprintzone = false
 		camera.call("start_shake")
 		camera.call("set_zoom_factor", 1.0)
 
 	# Reset to default jump animation when leaving zone
-	if area.has_meta("jump_1") or area.has_meta("jump_2") or area.has_meta("jump_3"):
+	if area and area.has_meta("jump_1") or area.has_meta("jump_2") or area.has_meta("jump_3"):
 		jump_zone_animation = ""
 
 
 # DEATH
 func _on_lethal_entered(area: Area2D) -> void:
-	if area.has_meta("lethal") and not is_death:
+	if area and area.has_meta("lethal") and not is_death:
 		is_death = true
 		Engine.time_scale = 0.3
 		velocity = Vector2.ZERO
