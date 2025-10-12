@@ -20,8 +20,12 @@ func start_shake(strength:float = DEFAULT_SHAKE_STRENGTH):
 	shake_strength = strength
 	
 func set_zoom_factor(factor: float):
-	factor = clamp(factor, 0.5, 0.3)
+	factor = clamp(factor, 0.3, 0.5)
 	target_zoom = default_zoom * factor
+	
+
+func reset_zoom() -> void:
+	target_zoom = default_zoom
 	
 func _process(delta: float) -> void:
 	if shake_strength > 0:

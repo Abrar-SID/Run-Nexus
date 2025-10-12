@@ -198,7 +198,7 @@ func _on_zones_exited(area: Area2D) -> void:
 		speed = 200.0
 		in_sprintzone = false
 		camera.call("start_shake")
-		camera.call("set_zoom_factor", 1.0)
+		camera.reset_zoom()
 
 	# Reset to default jump animation when leaving zone
 	if area and area.has_meta("jump_1") or area.has_meta("jump_2") or area.has_meta("jump_3"):

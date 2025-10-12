@@ -1,16 +1,43 @@
-[gd_scene load_steps=16 format=3 uid="uid://bu648cdlaide7"]
+[gd_scene load_steps=25 format=3 uid="uid://bu648cdlaide7"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_2mgxj"]
 [ext_resource type="Texture2D" uid="uid://bpijb31wnhm5y" path="res://resources/background/Frame 1.png" id="2_n8u0g"]
 [ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="3_0k41t"]
 [ext_resource type="Texture2D" uid="uid://dijaxn835s1b5" path="res://resources/sprites/run_demo.png" id="4_17vub"]
+[ext_resource type="Texture2D" uid="uid://p3gi84xmcrrx" path="res://resources/sprites/pause_icon.png" id="4_j2f15"]
 [ext_resource type="Script" path="res://scripts/audio_control.gd" id="4_xg2c3"]
+[ext_resource type="Texture2D" uid="uid://c8rcdw1i7ky5y" path="res://resources/sprites/restart_icon.png" id="5_fj4m7"]
 [ext_resource type="Texture2D" uid="uid://ibeysmo1isbs" path="res://resources/sprites/jump_demo.png" id="5_miho5"]
 [ext_resource type="Texture2D" uid="uid://dpxsa4pl8exdb" path="res://resources/sprites/wall_climb_demo.png" id="6_m1cf6"]
 [ext_resource type="Texture2D" uid="uid://bumfmjc8gjdsg" path="res://resources/sprites/wall_jump_demo.png" id="7_c0gu6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sy0j"]
 texture = ExtResource("2_n8u0g")
+
+[sub_resource type="Gradient" id="Gradient_scv3e"]
+colors = PackedColorArray(1, 1, 1, 0.505882, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l4rb2"]
+gradient = SubResource("Gradient_scv3e")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ha3dc"]
+texture = SubResource("GradientTexture2D_l4rb2")
+
+[sub_resource type="InputEventKey" id="InputEventKey_cg6a7"]
+device = -1
+keycode = 67
+unicode = 99
+
+[sub_resource type="Shortcut" id="Shortcut_r8763"]
+events = [SubResource("InputEventKey_cg6a7")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_7bc3g"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_ynd4y"]
+events = [SubResource("InputEventKey_7bc3g")]
 
 [sub_resource type="Gradient" id="Gradient_ek1ox"]
 
@@ -30,6 +57,7 @@ gradient = SubResource("Gradient_g6lhe")
 fill_to = Vector2(0.0785714, 0)
 
 [node name="generalUI" type="Node2D" node_paths=PackedStringArray("pause_menu", "game_ui", "controls_menu", "options_menu", "home_menu", "home_controls_menu", "settings", "home_settings", "finish_menu_1", "finish_menu_2", "finish_menu_3", "finish_menu_4")]
+z_index = 200
 script = ExtResource("1_2mgxj")
 pause_menu = NodePath("PauseMenuScreen")
 game_ui = NodePath("inGameUI")
@@ -205,52 +233,55 @@ text = "BACK"
 
 [node name="inGameUI" type="MarginContainer" parent="."]
 visible = false
-offset_left = 3.0
-offset_right = 1280.0
+offset_right = 1277.0
 offset_bottom = 722.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="inGameUI"]
-layout_mode = 2
-theme_override_constants/separation = 570
-
-[node name="leftCornerContainer" type="HBoxContainer" parent="inGameUI/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="inGameUI"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_constants/separation = 15
-alignment = 1
-
-[node name="pauseButtonContainer" type="MarginContainer" parent="inGameUI/VBoxContainer/leftCornerContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 
-[node name="togglePauseMenuButton" type="Button" parent="inGameUI/VBoxContainer/leftCornerContainer/pauseButtonContainer"]
-custom_minimum_size = Vector2(80, 80)
+[node name="Panel" type="Panel" parent="inGameUI/MarginContainer2"]
+custom_minimum_size = Vector2(250, 80)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 25
-text = "PAUSE"
+theme_override_styles/panel = SubResource("StyleBoxTexture_ha3dc")
 
-[node name="MarginContainer" type="MarginContainer" parent="inGameUI/VBoxContainer/leftCornerContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="inGameUI/MarginContainer2"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 15
 
-[node name="RestartButton" type="Button" parent="inGameUI/VBoxContainer/leftCornerContainer/MarginContainer"]
-custom_minimum_size = Vector2(80, 80)
+[node name="pauseButtonContainer" type="MarginContainer" parent="inGameUI/MarginContainer2/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_0k41t")
-theme_override_font_sizes/font_size = 25
-text = "RESTART"
-
-[node name="BottomDistanceContainer" type="MarginContainer" parent="inGameUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 0
 theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="togglePauseMenuButton" type="Button" parent="inGameUI/MarginContainer2/HBoxContainer/pauseButtonContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+theme_override_icons/icon = ExtResource("4_j2f15")
+shortcut = SubResource("Shortcut_r8763")
+flat = true
+text_overrun_behavior = 1
+autowrap_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="inGameUI/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RestartButton" type="Button" parent="inGameUI/MarginContainer2/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+theme_override_icons/icon = ExtResource("5_fj4m7")
+shortcut = SubResource("Shortcut_ynd4y")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="PauseMenuScreen" type="MarginContainer" parent="."]
 visible = false
@@ -262,7 +293,7 @@ grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenuScreen"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.392157)
+color = Color(0, 0, 0, 1)
 
 [node name="PauseTitle" type="MarginContainer" parent="PauseMenuScreen"]
 layout_mode = 2
@@ -294,6 +325,10 @@ alignment = 1
 [node name="togglePauseMenuButton" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(0.233925, 0.233925, 0.233925, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.299547, 0.299547, 0.299547, 1)
 theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 50
 text = "RESUME"
@@ -334,7 +369,7 @@ offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="ControlsMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.87451)
+color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ControlsMenuContainer"]
 layout_mode = 2
@@ -458,7 +493,7 @@ offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="HomeToControlsMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 0.87451)
+color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HomeToControlsMenuContainer"]
 layout_mode = 2
@@ -583,7 +618,7 @@ offset_bottom = 728.0
 
 [node name="ColorRect" type="ColorRect" parent="settingsMenu"]
 layout_mode = 2
-color = Color(0.190762, 0.190762, 0.190762, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="MarginContainer3" type="MarginContainer" parent="settingsMenu"]
 layout_mode = 2
@@ -652,7 +687,7 @@ offset_bottom = 728.0
 
 [node name="ColorRect" type="ColorRect" parent="homeToSettingsMenu"]
 layout_mode = 2
-color = Color(0.190762, 0.190762, 0.190762, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="MarginContainer3" type="MarginContainer" parent="homeToSettingsMenu"]
 layout_mode = 2
@@ -715,6 +750,7 @@ text = "Music"
 horizontal_alignment = 1
 
 [node name="FinishMenuLevel1" type="MarginContainer" parent="."]
+visible = false
 offset_right = 1280.0
 offset_bottom = 720.0
 
@@ -952,8 +988,8 @@ uppercase = true
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleSettinngButton" to="." method="_on_toggle_home_to_settings_button_pressed"]
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleHomeControlsMenuButton" to="." method="_on_toggle_home_controls_menu_button_pressed"]
 [connection signal="pressed" from="OptionMenuContainer/MarginContainer2/VBoxContainer/toggleOptionMenuButton" to="." method="_on_toggle_option_menu_button_pressed"]
-[connection signal="pressed" from="inGameUI/VBoxContainer/leftCornerContainer/pauseButtonContainer/togglePauseMenuButton" to="." method="_on_toggle_pause_menu_button_pressed"]
-[connection signal="pressed" from="inGameUI/VBoxContainer/leftCornerContainer/MarginContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="inGameUI/MarginContainer2/HBoxContainer/pauseButtonContainer/togglePauseMenuButton" to="." method="_on_toggle_pause_menu_button_pressed"]
+[connection signal="pressed" from="inGameUI/MarginContainer2/HBoxContainer/MarginContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/togglePauseMenuButton" to="." method="_on_toggle_pause_menu_button_pressed"]
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/toggleSettinngButton" to="." method="_on_toggle_settinng_button_pressed"]
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/toggleControlsMenuButton" to="." method="_on_toggle_controls_menu_button_pressed"]

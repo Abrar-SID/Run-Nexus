@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bccw4fsbdtyu8"]
+[gd_scene load_steps=22 format=3 uid="uid://bccw4fsbdtyu8"]
 
 [ext_resource type="PackedScene" uid="uid://3wxtqo3xrg85" path="res://scenes/world_icon.tscn" id="1_ijb5f"]
 [ext_resource type="Script" path="res://scripts/level_selection.gd" id="1_yo2sw"]
@@ -6,10 +6,57 @@
 [ext_resource type="PackedScene" uid="uid://bmpclaaxl4jf6" path="res://scenes/player_icon.tscn" id="3_vpnfn"]
 [ext_resource type="Texture2D" uid="uid://x70m4jgydasp" path="res://resources/sprites/Rectangle 13.png" id="5_2r48t"]
 [ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="6_6tjnb"]
+[ext_resource type="Texture2D" uid="uid://dey863qt850rf" path="res://resources/sprites/back_return_icon.png" id="6_xd1np"]
 [ext_resource type="Texture2D" uid="uid://f2tvfmruyp0j" path="res://resources/sprites/Group 12.png" id="7_acqds"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y2rp8"]
 texture = ExtResource("2_ldq71")
+
+[sub_resource type="InputEventKey" id="InputEventKey_ed3jh"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="InputEventKey" id="InputEventKey_ybkft"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ti5ic"]
+events = [SubResource("InputEventKey_ed3jh"), SubResource("InputEventKey_ybkft")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_pdjwk"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="InputEventKey" id="InputEventKey_qy61o"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_003qn"]
+events = [SubResource("InputEventKey_pdjwk"), SubResource("InputEventKey_qy61o")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_1qgii"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="InputEventKey" id="InputEventKey_pmtnj"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_kj4kj"]
+events = [SubResource("InputEventKey_1qgii"), SubResource("InputEventKey_pmtnj")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_er0uv"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="InputEventKey" id="InputEventKey_up2ho"]
+
+[sub_resource type="Shortcut" id="Shortcut_0vry4"]
+events = [SubResource("InputEventKey_er0uv"), SubResource("InputEventKey_up2ho")]
 
 [node name="LevelSelection" type="Control" node_paths=PackedStringArray("level_1_info", "level_2_info", "level_3_info", "level_4_info", "player_icon")]
 layout_mode = 3
@@ -101,7 +148,7 @@ theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="Level1Slider/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 40
 
 [node name="backbuttonContainer" type="MarginContainer" parent="Level1Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -113,18 +160,11 @@ theme_override_constants/margin_bottom = 15
 [node name="backtoHomeButton" type="Button" parent="Level1Slider/sliderContentContainer/headerContainer/backbuttonContainer"]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
-text = "BACK"
+shortcut = SubResource("Shortcut_ti5ic")
+icon = ExtResource("6_xd1np")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="titleContainer" type="MarginContainer" parent="Level1Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -229,7 +269,7 @@ theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="Level2Slider/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 40
 
 [node name="backbuttonContainer" type="MarginContainer" parent="Level2Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -243,16 +283,11 @@ custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
-text = "BACK"
+shortcut = SubResource("Shortcut_003qn")
+icon = ExtResource("6_xd1np")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="titleContainer" type="MarginContainer" parent="Level2Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -356,7 +391,7 @@ theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="Level3Slider/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 40
 
 [node name="backbuttonContainer" type="MarginContainer" parent="Level3Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -370,16 +405,11 @@ custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
-text = "BACK"
+shortcut = SubResource("Shortcut_kj4kj")
+icon = ExtResource("6_xd1np")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="titleContainer" type="MarginContainer" parent="Level3Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -498,16 +528,11 @@ custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
-text = "BACK"
+shortcut = SubResource("Shortcut_0vry4")
+icon = ExtResource("6_xd1np")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="titleContainer" type="MarginContainer" parent="Level4Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
