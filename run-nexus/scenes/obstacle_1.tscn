@@ -4,7 +4,6 @@
 
 [node name="Obstacle1" type="Area2D"]
 metadata/lethal = true
-metadata/jump1 = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2(0.8, 0.8)

@@ -6,7 +6,8 @@ const LEVEL_PATHS = [
 	"res://scenes/level_3.tscn",
 	"res://scenes/level_4.tscn"
 ]
-const HOME_PATH = ["res://scenes/ui.tscn"]
+const HOME_PATH: String = "res://scenes/ui.tscn"
+const LEVEL_SELECTION_PATH: String = "res://scenes/level_selection.tscn"
 
 @export var pause_menu : MarginContainer
 @export var game_ui : MarginContainer
@@ -17,14 +18,14 @@ const HOME_PATH = ["res://scenes/ui.tscn"]
 @export var settings : MarginContainer
 @export var home_settings : MarginContainer
 @export var finish_menu_1 : MarginContainer
-@export var finish_menu_2: MarginContainer
+@export var finish_menu_2 : MarginContainer
 @export var finish_menu_3 : MarginContainer
 @export var finish_menu_4 : MarginContainer
 
 var gameplay_scenes = ["level_1", "level_2", "level_3", "level_4"]
 
 
-func _ready():
+func _ready() -> void:
 	var current_scene_name = get_tree().current_scene.name
 
 	if current_scene_name in gameplay_scenes:
@@ -35,7 +36,7 @@ func _ready():
 		game_ui.visible = false
 
 
-func toggle_visibility(object) ->void:
+func toggle_visibility(object) -> void:
 	Transition.do_transition(func():
 		object.visible = not object.visible
 	)
@@ -70,7 +71,7 @@ func _on_toggle_home_controls_menu_button_pressed() -> void:
 
 
 func _on_start_game_button_pressed() -> void:
-	Transition.fade_to_scene("res://scenes/level_selection.tscn")
+	Transition.fade_to_scene(LEVEL_SELECTION_PATH)
 
 
 func _on_restart_button_pressed() -> void:
@@ -78,10 +79,10 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	Transition.fade_to_scene("res://scenes/level_selection.tscn")
+	Transition.fade_to_scene(LEVEL_SELECTION_PATH)
 
 
-func _on_toggle_settinng_button_pressed() -> void:
+func _on_toggle_settings_button_pressed() -> void:
 	Transition.do_transition(func():
 		settings.visible = not settings.visible
 		pause_menu.visible = not pause_menu.visible
@@ -101,77 +102,45 @@ func _on_exit_button_pressed() -> void:
 
 func level_finished_menu_1() -> void:
 	Transition.do_transition(func():
-		pause_menu.visible = false
-		game_ui.visible = false
-		controls_menu.visible = false
-		options_menu.visible = false
-		home_menu.visible = false
-		home_controls_menu.visible = false
-		settings.visible = false
-		
-		home_settings.visible = false
-		finish_menu_2.visible = false
-		finish_menu_3.visible = false
-		finish_menu_4.visible = false
-		
-		finish_menu_1.visible = true
+		var finish_menus = [finish_menu_1, finish_menu_2, finish_menu_3, finish_menu_4]
+		for menu in finish_menus:
+			menu.visible = false
+		for menu in [pause_menu, game_ui, controls_menu, options_menu, home_menu, home_controls_menu, settings, home_settings]:
+			menu.visible = false
+		finish_menus[0].visible = true
 	)
 
 
 func level_finished_menu_2() -> void:
 	Transition.do_transition(func():
-		pause_menu.visible = false
-		game_ui.visible = false
-		controls_menu.visible = false
-		options_menu.visible = false
-		home_menu.visible = false
-		home_controls_menu.visible = false
-		settings.visible = false
-		
-		home_settings.visible = false
-		finish_menu_1.visible = false
-		finish_menu_3.visible = false
-		finish_menu_4.visible = false
-		
-		finish_menu_2.visible = true
+		var finish_menus = [finish_menu_1, finish_menu_2, finish_menu_3, finish_menu_4]
+		for menu in finish_menus:
+			menu.visible = false
+		for menu in [pause_menu, game_ui, controls_menu, options_menu, home_menu, home_controls_menu, settings, home_settings]:
+			menu.visible = false
+		finish_menus[1].visible = true
 	)
 	
 	
 func level_finished_menu_3() -> void:
 	Transition.do_transition(func():
-		pause_menu.visible = false
-		game_ui.visible = false
-		controls_menu.visible = false
-		options_menu.visible = false
-		home_menu.visible = false
-		home_controls_menu.visible = false
-		settings.visible = false
-		
-		home_settings.visible = false
-		finish_menu_1.visible = false
-		finish_menu_2.visible = false
-		finish_menu_4.visible = false
-		
-		finish_menu_3.visible = true
+		var finish_menus = [finish_menu_1, finish_menu_2, finish_menu_3, finish_menu_4]
+		for menu in finish_menus:
+			menu.visible = false
+		for menu in [pause_menu, game_ui, controls_menu, options_menu, home_menu, home_controls_menu, settings, home_settings]:
+			menu.visible = false
+		finish_menus[2].visible = true
 	)
 
 
 func level_finished_menu_4() -> void:
 	Transition.do_transition(func():
-		pause_menu.visible = false
-		game_ui.visible = false
-		controls_menu.visible = false
-		options_menu.visible = false
-		home_menu.visible = false
-		home_controls_menu.visible = false
-		settings.visible = false
-		
-		home_settings.visible = false
-		finish_menu_1.visible = false
-		finish_menu_2.visible = false
-		finish_menu_3.visible = false
-		
-		finish_menu_4.visible = true
+		var finish_menus = [finish_menu_1, finish_menu_2, finish_menu_3, finish_menu_4]
+		for menu in finish_menus:
+			menu.visible = false
+		for menu in [pause_menu, game_ui, controls_menu, options_menu, home_menu, home_controls_menu, settings, home_settings]:
+			menu.visible = false
+		finish_menus[3].visible = true
 	)
 
 

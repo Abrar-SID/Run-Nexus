@@ -16,13 +16,13 @@ const LEVEL_PATHS = [
 @export var player_icon: TextureRect
 
 var current_world: int = 0
-var level_infos: Array
+var level_infos: Array[NinePatchRect]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if worlds.is_empty() or not player_icon:
-		print("Error: missing UI elements")
+		push_error("Error: missing UI elements")
 		return
 
 	player_icon.global_position = worlds[current_world].global_position
@@ -31,7 +31,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_back") and current_world > 0:
 		current_world -=1
 		player_icon.global_position = worlds[current_world].global_position
@@ -43,14 +43,14 @@ func _input(event) -> void:
 		show_only_level_info(current_world)
 		
 
-func show_only_level_info(level_index: int) ->void:
+func show_only_level_info(level_index: int) -> void:
 	for i in range(level_infos.size()):
 		level_infos[i].visible = (i == level_index)
 		
 
 func move_to_world(index:int) -> void:
 	if index < 0 or index >= worlds.size():
-		return # indvalid index
+		return # invalid index
 
 	current_world = index
 	player_icon.global_position = worlds[index].global_position

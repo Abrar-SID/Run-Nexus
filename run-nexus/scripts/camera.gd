@@ -1,6 +1,7 @@
 extends Camera2D
 
 const DEFAULT_SHAKE_STRENGTH: float = 20.0
+const MAX_SHAKE_STRENGTH: float = 50.0
 
 var shake_strength: float = 0.0
 var shake_decay: float = 20.0
@@ -14,10 +15,13 @@ func _ready() -> void:
 	zoom = default_zoom
 	target_zoom = zoom
 
+
 func start_shake(strength:float = DEFAULT_SHAKE_STRENGTH):
-	if strength < 0:
+	if strength <= 0:
+		push_warning("Shake strength should be positive. Using absolute value.")
 		strength = abs(strength)
-	shake_strength = strength
+	shake_strength = clamp(strength, 0, MAX_SHAKE_STRENGTH)
+	
 	
 func set_zoom_factor(factor: float):
 	factor = clamp(factor, 0.3, 0.5)
@@ -26,6 +30,7 @@ func set_zoom_factor(factor: float):
 
 func reset_zoom() -> void:
 	target_zoom = default_zoom
+	
 	
 func _process(delta: float) -> void:
 	if shake_strength > 0:

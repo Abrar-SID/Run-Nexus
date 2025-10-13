@@ -562,7 +562,7 @@ rotation = 1.54374
 scale = Vector2(1.67315, 5.29145)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("12_73xxg")]
-position = Vector2(355, 540)
+position = Vector2(302, 560)
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
 

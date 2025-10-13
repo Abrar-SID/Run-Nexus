@@ -18,11 +18,11 @@ func do_transition(callback: Callable) -> void:
 
 	var tween = create_tween()
 	
-	# Fade out to black
+	# fade out to black
 	tween.tween_property(fade_rect, "modulate:a", 1.0, fade_time)
-	# Pause while screen is black
+	# pause while screen is black
 	tween.tween_interval(black_pause)
-	# Switch of scenes
+	# switch of scenes
 	tween.tween_callback(callback)
 	
 	tween.tween_property(fade_rect, "modulate:a", 0.0, fade_time)

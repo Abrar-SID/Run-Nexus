@@ -333,7 +333,7 @@ theme_override_fonts/font = ExtResource("3_0k41t")
 theme_override_font_sizes/font_size = 50
 text = "RESUME"
 
-[node name="toggleSettinngButton" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
+[node name="toggleSettingsButton" type="Button" parent="PauseMenuScreen/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_0k41t")
@@ -991,14 +991,14 @@ uppercase = true
 [connection signal="pressed" from="inGameUI/MarginContainer2/HBoxContainer/pauseButtonContainer/togglePauseMenuButton" to="." method="_on_toggle_pause_menu_button_pressed"]
 [connection signal="pressed" from="inGameUI/MarginContainer2/HBoxContainer/MarginContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/togglePauseMenuButton" to="." method="_on_toggle_pause_menu_button_pressed"]
-[connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/toggleSettinngButton" to="." method="_on_toggle_settinng_button_pressed"]
+[connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/toggleSettingsButton" to="." method="_on_toggle_settings_button_pressed"]
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/toggleControlsMenuButton" to="." method="_on_toggle_controls_menu_button_pressed"]
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="PauseMenuScreen/MarginContainer2/VBoxContainer/QuitButtom" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="ControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer/toggleControlsMenuButton" to="." method="_on_toggle_controls_menu_button_pressed"]
 [connection signal="pressed" from="HomeToControlsMenuContainer/VBoxContainer/HBoxContainer2/MarginContainer/toggleHomeControlsMenuButton" to="." method="_on_toggle_home_controls_menu_button_pressed"]
 [connection signal="value_changed" from="settingsMenu/MarginContainer/VBoxContainer/AudioControl" to="settingsMenu/MarginContainer/VBoxContainer/AudioControl" method="_on_value_changed"]
-[connection signal="pressed" from="settingsMenu/MarginContainer/VBoxContainer/backToPauseButton" to="." method="_on_toggle_settinng_button_pressed"]
+[connection signal="pressed" from="settingsMenu/MarginContainer/VBoxContainer/backToPauseButton" to="." method="_on_toggle_settings_button_pressed"]
 [connection signal="value_changed" from="homeToSettingsMenu/MarginContainer/VBoxContainer/AudioControl" to="homeToSettingsMenu/MarginContainer/VBoxContainer/AudioControl" method="_on_value_changed"]
 [connection signal="pressed" from="homeToSettingsMenu/MarginContainer/VBoxContainer/backToOptionsButton" to="." method="_on_toggle_home_to_settings_button_pressed"]
 [connection signal="pressed" from="FinishMenuLevel1/MarginContainer/VBoxContainer/continueLevel2Button" to="." method="_on_continue_level_2_button_pressed"]

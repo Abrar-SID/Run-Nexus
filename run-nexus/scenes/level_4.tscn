@@ -643,7 +643,7 @@ shape = SubResource("RectangleShape2D_oxta7")
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Obstacle1" parent="Obstacles" instance=ExtResource("12_a3wag")]
-position = Vector2(508, 320)
+position = Vector2(508, 322)
 
 [node name="Obstacle2" parent="Obstacles" instance=ExtResource("12_a3wag")]
 position = Vector2(891, 425)
@@ -809,6 +809,7 @@ range_layer_max = 100
 shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="generalUI" parent="CanvasLayer" instance=ExtResource("9_vp3ke")]
 
