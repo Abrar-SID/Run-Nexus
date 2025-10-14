@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bca4ihx55b5p2"]
+[gd_scene load_steps=47 format=3 uid="uid://bca4ihx55b5p2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_148j1"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="3_6yyc8"]
@@ -64,17 +64,17 @@ region = Rect2(1152, 256, 128, 128)
 atlas = ExtResource("3_ec2cd")
 region = Rect2(1280, 256, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iyrbq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kdbe"]
 atlas = ExtResource("3_ec2cd")
-region = Rect2(896, 256, 128, 128)
+region = Rect2(640, 256, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_asi2i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7ay3"]
 atlas = ExtResource("3_ec2cd")
-region = Rect2(1024, 256, 128, 128)
+region = Rect2(640, 384, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o5dxa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_obt6j"]
 atlas = ExtResource("3_ec2cd")
-region = Rect2(768, 256, 128, 128)
+region = Rect2(768, 640, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkofj"]
 atlas = ExtResource("3_ec2cd")
@@ -95,22 +95,6 @@ region = Rect2(512, 640, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6k6ux"]
 atlas = ExtResource("3_ec2cd")
 region = Rect2(640, 640, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6v0gt"]
-atlas = ExtResource("3_ec2cd")
-region = Rect2(768, 640, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dql14"]
-atlas = ExtResource("3_ec2cd")
-region = Rect2(896, 640, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kdbe"]
-atlas = ExtResource("3_ec2cd")
-region = Rect2(640, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x7ay3"]
-atlas = ExtResource("3_ec2cd")
-region = Rect2(640, 384, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hd6n1"]
 atlas = ExtResource("3_ec2cd")
@@ -228,48 +212,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iyrbq")
+"texture": SubResource("AtlasTexture_1kdbe")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_asi2i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pwgf")
+"texture": SubResource("AtlasTexture_x7ay3")
 }],
-"loop": true,
-"name": &"jump_1",
-"speed": 12.0
+"loop": false,
+"name": &"landing",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o5dxa")
+"texture": SubResource("AtlasTexture_obt6j")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mkofj")
@@ -287,25 +241,11 @@ animations = [{
 "texture": SubResource("AtlasTexture_6k6ux")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6v0gt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dql14")
+"texture": SubResource("AtlasTexture_obt6j")
 }],
-"loop": false,
-"name": &"jump_2",
+"loop": true,
+"name": &"normal_jump",
 "speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1kdbe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x7ay3")
-}],
-"loop": false,
-"name": &"landing",
-"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -435,7 +375,7 @@ stream = ExtResource("4_2xaqn")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4.84115, 2.9212)
 sprite_frames = SubResource("SpriteFrames_p8ltb")
-animation = &"landing"
+animation = &"normal_jump"
 autoplay = "idle"
 flip_h = true
 

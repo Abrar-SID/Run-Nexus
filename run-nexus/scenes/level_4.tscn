@@ -809,7 +809,6 @@ range_layer_max = 100
 shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="generalUI" parent="CanvasLayer" instance=ExtResource("9_vp3ke")]
 

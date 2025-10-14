@@ -15,7 +15,7 @@
 texture = ExtResource("2_n8u0g")
 
 [sub_resource type="Gradient" id="Gradient_scv3e"]
-colors = PackedColorArray(1, 1, 1, 0.505882, 1, 1, 1, 0)
+colors = PackedColorArray(0, 0, 0, 0.505882, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_l4rb2"]
 gradient = SubResource("Gradient_scv3e")

@@ -25,6 +25,7 @@ const WALL_JUMP_PUSHBACK = 100.0
 const WALL_JUMP_FRAMES = 10
 const SPRINT_MULTIPLIER = 5.0
 const SPRINT_TWEEN_SPEED = 2.0
+const JUMP_BUFFER_MAX = 5
 
 @export var running_sound_player : Node
 @export var sliding_sound_player : AudioStreamPlayer
@@ -40,7 +41,8 @@ var wall_jump_frames = 0
 var is_wall_sliding: bool = false
 var was_on_floor: bool = false
 var is_death: bool = false
-var in_lethal_zone: bool = false
+var jump_buffer_frames: int = 0
+var is_jumping: bool = false
 
 
 # ========================
@@ -56,33 +58,39 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	handle_wall_slide(delta)
-
-	# Handle jump logic (floor and wall).
-	if Input.is_action_just_pressed("jump"):
-		var move_axis = Input.get_axis("move_back", "move_front")
-		var is_moving = abs(move_axis) > 0.1 
-		
-		if is_on_floor():
-			velocity.y = JUMP_VELOCITY
-			jump_sound_player.play()
-
-			# Checking lethal directyly using overlapping areas
-			if is_moving and in_lethal_zone:
-				animated_sprite.play("jump_2")
-			elif not is_moving:
-				animated_sprite.play("jump_1")
-			else:
-				animated_sprite.play("jump_1")
-		else:
-			animated_sprite.play("jump_1")
-
-	# Falling animation
-	if not is_on_floor() and not is_wall_sliding and velocity.y > 0:
-		animated_sprite.play("falling")
-
+	
 	# Movement Input. Getting the input direction: -1, 0, 1
 	var direction :int = clamp(Input.get_axis("move_back", "move_front"), -1, 1)
 	delta = clamp(delta, 0.0, 0.1) # Prevent extreme delta spikes
+	
+	# Idle/Run state logic and sound control and Handle jump logic (floor and wall).
+	if not is_wall_sliding:
+		if is_on_floor():
+			is_jumping = false
+			if Input.is_action_just_pressed("jump"):
+				velocity.y = JUMP_VELOCITY
+				is_jumping = true
+				jump_buffer_frames = JUMP_BUFFER_MAX
+				if direction == 0:
+					animated_sprite.play("idle_jump")
+				else:
+					animated_sprite.play("normal_jump")
+				if running_sound_player.playing:
+					running_sound_player.stop()
+			else:
+				if direction == 0:
+					animated_sprite.play("idle")
+					if running_sound_player.playing:
+						running_sound_player.stop()
+				else:
+					animated_sprite.play("run")
+					if not running_sound_player.playing:
+						running_sound_player.play()
+		else:
+			if not is_jumping:
+				animated_sprite.play("falling")
+				if running_sound_player.playing:
+					running_sound_player.stop()
 
 	# Handle sprint zone movement direction and sprite flipping.
 	if wall_jump_frames > 0:
@@ -96,20 +104,6 @@ func _physics_process(delta: float) -> void:
 				animated_sprite.flip_h = true
 			elif direction > 0:
 				animated_sprite.flip_h = false
-
-	# Idle/Run state logic and sound control.
-	if is_on_floor() and not is_wall_sliding:
-		if direction == 0:
-			animated_sprite.play("idle")
-			if running_sound_player.playing:
-				running_sound_player.stop()
-		else:
-			animated_sprite.play("run")
-			if not running_sound_player.playing:
-				running_sound_player.play()
-	else:
-		if running_sound_player.playing:
-			running_sound_player.stop()
 
 	# Adjust horizontal velocity.
 	var target_speed: float = 200.0
@@ -126,6 +120,16 @@ func _physics_process(delta: float) -> void:
 	handle_walljump()
 	move_and_slide()
 
+
+func _on_animatedsprite_animation_finished() -> void:
+	if animated_sprite.animation == "normal_jump":
+		is_jumping = false
+		if not is_on_floor() and not is_wall_sliding:
+			animated_sprite.play("falling")
+	elif animated_sprite.animation == "idle_jumo":
+		is_jumping = false
+		if not is_on_floor() and not is_wall_sliding:
+			animated_sprite.play("falling")
 
 # =================
 # WALL SLIDING
@@ -202,9 +206,6 @@ func _on_zones_entered(area: Area2D) -> void:
 		camera.call("set_zoom_factor", 0.5)
 		in_sprintzone = true
 
-	if area and area.has_meta("lethal"):
-		in_lethal_zone = true
-
 
 func _on_zones_exited(area: Area2D) -> void:
 	#Rest speed when leaving zone
@@ -212,11 +213,7 @@ func _on_zones_exited(area: Area2D) -> void:
 		speed = 200.0
 		in_sprintzone = false
 		camera.call("start_shake")
-		camera.reset_zoom()
-
-	# Reset to default jump animation when leaving zone
-	if area and area.has_meta("lethal"):
-		in_lethal_zone = false
+		camera.reset_zoom() 
 
 
 #=================
