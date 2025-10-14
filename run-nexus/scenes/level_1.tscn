@@ -773,7 +773,7 @@ scale = Vector2(6.31999, 7.12)
 shape = SubResource("RectangleShape2D_72c2v")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_nk3fm")]
-position = Vector2(114, 254)
+position = Vector2(7733, 360)
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
 

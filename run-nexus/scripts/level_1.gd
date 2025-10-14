@@ -4,6 +4,7 @@ extends Node2D
 @onready var ui = $CanvasLayer/generalUI
 
 
+# Triggers level completion when player enters the end zone.
 func _on_level_1_end_zone_body_entered(body: Node2D) -> void:
 	if not ui:
 		push_error("UI node missing")

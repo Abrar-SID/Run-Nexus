@@ -19,6 +19,7 @@ var current_world: int = 0
 var level_infos: Array[NinePatchRect]
 
 
+# Controls world selection UI and scene transitions.
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if worlds.is_empty() or not player_icon:
