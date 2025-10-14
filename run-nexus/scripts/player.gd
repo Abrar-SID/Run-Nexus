@@ -52,6 +52,10 @@ func _physics_process(delta: float) -> void:
 	if is_death:
 		return
 	
+	# Decrement wall jump frames.
+	if wall_jump_frames > 0:
+		wall_jump_frames -= 1
+	
 	apply_gravity(delta)
 	handle_wall_slide(delta)
 	handle_movement(delta)
@@ -64,6 +68,24 @@ func handle_movement(delta: float) -> void:
 	var direction :int = clamp(Input.get_axis("move_back", "move_front"), -1, 1)
 	delta = clamp(delta, 0.0, 0.1) # Prevent extreme delta spikes.
 	
+	# Lock player in sprint zone.
+	if in_sprint_zone and is_on_floor() and wall_jump_frames == 0:
+		var target_speed: float = 200.0
+		target_speed = 1000.0
+		velocity.x = move_toward(
+			velocity.x, 
+			target_speed, 
+			abs(target_speed - speed) * delta
+		)
+		direction = 1
+		animated_sprite.flip_h = false
+		is_jumping = false # blocks jumping
+		jump_buffer_frames = 0
+		animated_sprite.play("run")
+		return
+		
+	
+	#Normal movement here.
 	# Idle/Run state logic and sound control and Handle jump logic (floor and wall).
 	if not is_wall_sliding:
 		if is_on_floor():
@@ -93,35 +115,19 @@ func handle_movement(delta: float) -> void:
 				if running_sound_player.playing:
 					running_sound_player.stop()
 	
-	# Handle sprint zone movement direction and sprite flipping.
-	if wall_jump_frames > 0:
-		wall_jump_frames -= 1
-	else: 
-		if in_sprint_zone and is_on_floor():
-			direction = 1
-			animated_sprite.play("run")
-			animated_sprite.flip_h = false
-		else:
-			if direction < 0:
-				animated_sprite.flip_h = true
-			elif direction > 0:
-				animated_sprite.flip_h = false
-	
-	# Adjust horizontal velocity.
-	var target_speed: float = 200.0
+	# Handling sprite flipping depending on direction of the player.
 	if wall_jump_frames == 0:
-		if in_sprint_zone and is_on_floor():
-			target_speed = 1000.0
-			velocity.x = move_toward(
-				velocity.x, 
-				target_speed, 
-				abs(target_speed - speed) * delta
-				)
+		if direction < 0:
+			animated_sprite.flip_h = true
+		elif direction > 0:
+			animated_sprite.flip_h = false
+	
+	# Adjusting horizontal velocity.
+	if wall_jump_frames == 0:
+		if direction != 0:
+			velocity.x = direction * speed
 		else:
-			if direction != 0:
-				velocity.x = direction * speed
-			else:
-				velocity.x = move_toward(velocity.x, 0, speed)
+			velocity.x = move_toward(velocity.x, 0, speed)
 
 
 func apply_gravity(delta: float) -> void:
@@ -147,6 +153,12 @@ func _on_animated_sprite_animation_finished() -> void:
 # =================
 # Handle wall slide, detection, friction and sound.
 func handle_wall_slide(delta: float) -> void:
+	if in_sprint_zone and is_on_floor():
+		if sliding_sound_player and sliding_sound_player.playing:
+			sliding_sound_player.stop()
+		is_wall_sliding = false
+		return
+		
 	var was_sliding = is_wall_sliding
 	is_wall_sliding = false
 	
