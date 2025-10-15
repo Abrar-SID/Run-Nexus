@@ -1,6 +1,12 @@
 @tool
 extends Control
 
+# ============
+# LEVEL LABEL DISPLAY SCRIPT PURPOSE
+# ============
+# Displaying the current level number on a Label node.
+# Updating automatically both in-game and in the editor.
+
 @onready var label: Label = $Label
 @export var level_index: int = 1
 

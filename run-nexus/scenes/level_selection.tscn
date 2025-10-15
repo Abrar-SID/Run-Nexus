@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://3wxtqo3xrg85" path="res://scenes/world_icon.tscn" id="1_ijb5f"]
 [ext_resource type="Script" path="res://scripts/level_selection.gd" id="1_yo2sw"]
 [ext_resource type="Texture2D" uid="uid://c5ppwguha77b8" path="res://resources/background/TV - 2.png" id="2_ldq71"]
-[ext_resource type="PackedScene" uid="uid://bmpclaaxl4jf6" path="res://scenes/player_icon.tscn" id="3_vpnfn"]
+[ext_resource type="PackedScene" uid="uid://bmpclaaxl4jf6" path="res://scenes/location_marker_icon.tscn" id="3_vpnfn"]
 [ext_resource type="Texture2D" uid="uid://x70m4jgydasp" path="res://resources/sprites/Rectangle 13.png" id="5_2r48t"]
 [ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="6_6tjnb"]
 [ext_resource type="Texture2D" uid="uid://dey863qt850rf" path="res://resources/sprites/back_return_icon.png" id="6_xd1np"]

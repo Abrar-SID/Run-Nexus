@@ -1,8 +1,15 @@
 extends Node2D
 
-# ==============
+# ======
+# GENERAL UI MANAGER PURPOSE
+# ======
+# Controlling all in-game and home UI menus.
+# Handling scene transitions, pause menus, and finish screens using the Transition system.
+# Ensuring consistent visibility and fade logic across gameplay and UI states.
+
+# =========
 # PATH CONSTANTS
-# ==============
+# =========
 const LEVEL_PATHS = [
 	"res://scenes/level_1.tscn",
 	"res://scenes/level_2.tscn",
@@ -13,7 +20,7 @@ const HOME_PATH: String = "res://scenes/ui.tscn"
 const LEVEL_SELECTION_PATH: String = "res://scenes/level_selection.tscn"
 
 # ============
-# UI ELEMENT REFFEREnCES
+# UI ELEMENT REFERENCES
 # ============
 @export var pause_menu : MarginContainer
 @export var game_ui : MarginContainer
@@ -48,6 +55,8 @@ func _ready() -> void:
 # ===========
 # MENU TOGGLE FUNCTIONS
 # ===========
+# For switching menus easily. 
+# Transition(fade in and out) is used for smooth visual transitions.
 func toggle_visibility(object) -> void:
 	Transition.do_transition(func():
 		object.visible = not object.visible
@@ -101,7 +110,7 @@ func _on_quit_button_pressed() -> void:
 	Transition.fade_to_scene(LEVEL_SELECTION_PATH)
 
 
-# # Switch visibility between settings menu and pause menu
+# Switch visibility between settings menu and pause menu
 func _on_toggle_settings_button_pressed() -> void:
 	Transition.do_transition(func():
 		settings.visible = not settings.visible

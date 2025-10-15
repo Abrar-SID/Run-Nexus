@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+# =====================
+# PLAYER CONTROLLER SCRIPT PURPOSE
+# =====================
+# Handling all player movment, wall sliding, wall jumping, sprint zones.
+# Handling death, and related sounds and animations.
+# Designed for modularity and physcis consistency across all levels.
+
 # ===================
 # NODES REFERENCES
 # ===================
@@ -20,10 +27,11 @@ const JUMP_VELOCITY = -350.0
 const WALL_JUMP_VELOCITY = -300.0
 const WALL_SLIDE_SPEED = 50.0
 const WALL_SLIDE_FRICTION = 2000.0
-const WALL_JUMP_PUSHBACK = 100.0
+const WALL_JUMP_PUSHBACK = 150.0
 const WALL_JUMP_FRAMES = 10
 const SPRINT_MULTIPLIER = 5.0
-const SPRINT_TWEEN_SPEED = 2.0
+const SPRINT_ACCELERATION = 2.0
+const SPRINT_DECELERATION = 800.0
 const JUMP_BUFFER_MAX = 5
 
 @export var running_sound_player : Node
@@ -35,12 +43,11 @@ const JUMP_BUFFER_MAX = 5
 # ================
 # State tracking for speed, wall and death conditions.
 var speed: float = 200.0
+var sprint_target_speed: float = 1000.0
 var in_sprint_zone: bool = false
 var wall_jump_frames = 0
 var is_wall_sliding: bool = false
-var was_on_floor: bool = false
 var is_death: bool = false
-var jump_buffer_frames: int = 0
 var is_jumping: bool = false
 
 
@@ -63,6 +70,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+# Applies gravity gradually over time isntead of instantly.
+# Keeps jump arcs consistent regardless of frame rate.
+func apply_gravity(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+
 func handle_movement(delta: float) -> void:
 	# Movement Input. Getting the input direction: -1, 0, 1.
 	var direction :int = clamp(Input.get_axis("move_back", "move_front"), -1, 1)
@@ -70,17 +84,14 @@ func handle_movement(delta: float) -> void:
 	
 	# Lock player in sprint zone.
 	if in_sprint_zone and is_on_floor() and wall_jump_frames == 0:
-		var target_speed: float = 200.0
-		target_speed = 1000.0
 		velocity.x = move_toward(
 			velocity.x, 
-			target_speed, 
-			abs(target_speed - speed) * delta
+			sprint_target_speed, 
+			abs(sprint_target_speed - speed) * delta
 		)
 		direction = 1
 		animated_sprite.flip_h = false
 		is_jumping = false # blocks jumping
-		jump_buffer_frames = 0
 		animated_sprite.play("run")
 		return
 		
@@ -93,27 +104,22 @@ func handle_movement(delta: float) -> void:
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = JUMP_VELOCITY
 				is_jumping = true
-				jump_buffer_frames = JUMP_BUFFER_MAX
 				if direction == 0:
 					animated_sprite.play("idle_jump")
 				else:
 					animated_sprite.play("normal_jump")
-				if running_sound_player.playing:
-					running_sound_player.stop()
+				stop_running_sound()
 			else:
 				if direction == 0:
 					animated_sprite.play("idle")
-					if running_sound_player.playing:
-						running_sound_player.stop()
+					stop_running_sound()
 				else:
 					animated_sprite.play("run")
-					if not running_sound_player.playing:
-						running_sound_player.play()
+					start_running_sound()
 		else:
 			if not is_jumping:
 				animated_sprite.play("falling")
-				if running_sound_player.playing:
-					running_sound_player.stop()
+				stop_running_sound()
 	
 	# Handling sprite flipping depending on direction of the player.
 	if wall_jump_frames == 0:
@@ -130,19 +136,9 @@ func handle_movement(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, speed)
 
 
-func apply_gravity(delta: float) -> void:
-	# Apply gravity when airborne.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-
 # To check when normal jump ends so that falling can start.
 func _on_animated_sprite_animation_finished() -> void:
-	if animated_sprite.animation == "normal_jump":
-		is_jumping = false
-		if not is_on_floor() and not is_wall_sliding:
-			animated_sprite.play("falling")
-	elif animated_sprite.animation == "idle_jump":
+	if animated_sprite.animation in ["normal_jump", "idle_jump"]:
 		is_jumping = false
 		if not is_on_floor() and not is_wall_sliding:
 			animated_sprite.play("falling")
@@ -154,8 +150,7 @@ func _on_animated_sprite_animation_finished() -> void:
 # Handle wall slide, detection, friction and sound.
 func handle_wall_slide(delta: float) -> void:
 	if in_sprint_zone and is_on_floor():
-		if sliding_sound_player and sliding_sound_player.playing:
-			sliding_sound_player.stop()
+		stop_sliding_sound()
 		is_wall_sliding = false
 		return
 		
@@ -163,8 +158,8 @@ func handle_wall_slide(delta: float) -> void:
 	is_wall_sliding = false
 	
 	if is_on_floor() or wall_jump_frames > 0:
-		if was_sliding and sliding_sound_player:
-			sliding_sound_player.stop()
+		if was_sliding:
+			stop_sliding_sound()
 		return
 	
 	var on_left = wall_detector_left.is_colliding()
@@ -175,9 +170,7 @@ func handle_wall_slide(delta: float) -> void:
 	if (on_left or on_right) and velocity.y >= 0.0:
 		is_wall_sliding = true
 		animated_sprite.play("wall_sliding")
-		
-		if sliding_sound_player and not sliding_sound_player.playing:
-			sliding_sound_player.play()
+		start_sliding_sound()
 		
 		if ((on_left and pressing_left) or (on_right and pressing_right)):
 			velocity.y = move_toward(
@@ -192,8 +185,7 @@ func handle_wall_slide(delta: float) -> void:
 				WALL_SLIDE_FRICTION * delta
 				)
 	else:
-		if sliding_sound_player and sliding_sound_player.playing:
-			sliding_sound_player.stop()
+		stop_sliding_sound()
 
 
 # ============
@@ -230,16 +222,17 @@ func handle_walljump() -> void:
 
 
 # ==============================
-# AREA2D SIGNALS
+# AREA2D/ZONE SIGNALS
 # ==============================
 # Sprintzone and lethal adjust movement and animations dynamically.
 func _on_zones_entered(area: Area2D) -> void:
 	if area and area.has_meta("sprintzone"):
-		# Increases speed when entering zone.
+		# Gradually restores player speed after leaving speint zone.
+		# Aceleration for smoother transitions.
 		velocity.x = move_toward(
 			velocity.x, 
 			speed * SPRINT_MULTIPLIER, 
-			SPRINT_TWEEN_SPEED
+			SPRINT_ACCELERATION
 			)
 		camera.call("start_shake")
 		camera.call("set_zoom_factor", 0.5)
@@ -249,10 +242,39 @@ func _on_zones_entered(area: Area2D) -> void:
 func _on_zones_exited(area: Area2D) -> void:
 	# Reset speed when leaving zone.
 	if area and area.has_meta("sprintzone"):
-		speed = 200.0
 		in_sprint_zone = false
 		camera.call("start_shake")
-		camera.reset_zoom() 
+		camera.reset_zoom()
+		# Gradually resotres player speed after leaving speint zone.
+		# Deceleration for smoother transitions.
+		velocity.x = move_toward(
+			velocity.x, 
+			sign(velocity.x) * sprint_target_speed, 
+			SPRINT_DECELERATION * get_physics_process_delta_time()
+		)
+
+
+# ===============
+# SOUND HANDLING
+# ===============
+func start_running_sound() -> void:
+	if not running_sound_player.playing:
+		running_sound_player.play()
+
+
+func stop_running_sound() -> void:
+	if running_sound_player.playing:
+		running_sound_player.stop()
+
+
+func start_sliding_sound() -> void:
+	if not sliding_sound_player.playing:
+		sliding_sound_player.play()
+
+
+func stop_sliding_sound() -> void:
+	if sliding_sound_player.playing:
+		sliding_sound_player.stop()
 
 
 #=================
