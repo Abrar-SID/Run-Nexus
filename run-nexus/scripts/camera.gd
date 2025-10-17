@@ -53,7 +53,7 @@ func start_shake(strength:float = DEFAULT_SHAKE_STRENGTH):
 # Sets zoom factor relative to default zoom.
 # Smaller factors zoom in, larger factors zoom out.
 func set_zoom_factor(factor: float):
-	factor = clamp(factor, 0.3, 0.5) # Prevents extreme zoomv values.
+	factor = clamp(factor, 0.4, 0.5) # Prevents extreme zoom values.
 	target_zoom = default_zoom * factor
 
 

@@ -17,7 +17,7 @@ extends CanvasLayer
 # ========
 # Cntrols how long the fade effect lasts and how long the screen stays black.
 @export var fade_time: float = 0.5
-@export var black_pause: float = 0.1
+@export var black_pause: float = 0.2
 
 
 # ========

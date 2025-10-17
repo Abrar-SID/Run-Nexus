@@ -28,6 +28,7 @@ func _ready() -> void:
 	audio_bus_id = AudioServer.get_bus_index(audio_bus_name)
 	if audio_bus_id == -1:
 		push_error("Invalid audio bus name:" + audio_bus_name)
+		return
 
 
 # ============

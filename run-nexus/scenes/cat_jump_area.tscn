@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://cev7kkimpti0x"]
-
-[node name="CatJumpArea" type="Area2D"]
-metadata/cat_jump_area = true

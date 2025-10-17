@@ -182,4 +182,4 @@ func _on_continue_level_4_button_pressed() -> void:
 
 
 func _on_continue_home_button_pressed() -> void:
-	Transition.fade_to_scene(LEVEL_PATHS[0])
+	Transition.fade_to_scene(HOME_PATH)

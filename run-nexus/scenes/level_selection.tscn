@@ -520,7 +520,7 @@ theme_override_constants/separation = 50
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 15
+theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 15
 
 [node name="backtoHomeButton" type="Button" parent="Level4Slider/sliderContentContainer/headerContainer/backbuttonContainer"]

@@ -32,7 +32,6 @@ const WALL_JUMP_FRAMES = 10
 const SPRINT_MULTIPLIER = 5.0
 const SPRINT_ACCELERATION = 2.0
 const SPRINT_DECELERATION = 800.0
-const JUMP_BUFFER_MAX = 5
 
 @export var running_sound_player : Node
 @export var sliding_sound_player : AudioStreamPlayer
@@ -66,7 +65,7 @@ func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	handle_wall_slide(delta)
 	handle_movement(delta)
-	handle_walljump()
+	handle_wall_jump()
 	move_and_slide()
 
 
@@ -192,7 +191,7 @@ func handle_wall_slide(delta: float) -> void:
 # WALL JUMPS
 # ============
 # Enables jumping off walls and pushback and animations.
-func handle_walljump() -> void:
+func handle_wall_jump() -> void:
 	if is_on_floor() or in_sprint_zone:
 		return
 	
@@ -235,7 +234,7 @@ func _on_zones_entered(area: Area2D) -> void:
 			SPRINT_ACCELERATION
 			)
 		camera.call("start_shake")
-		camera.call("set_zoom_factor", 0.5)
+		camera.call("set_zoom_factor", 0.5 )
 		in_sprint_zone = true
 
 

@@ -20,3 +20,4 @@ func _on_level_3_end_zone_body_entered(body: Node2D) -> void:
 
 	if body and body == player and ui:
 		ui.level_finished_menu_3()
+		print("Level 3 end zone triggered.")
