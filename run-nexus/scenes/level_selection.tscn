@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://c5ppwguha77b8" path="res://resources/background/TV - 2.png" id="2_ldq71"]
 [ext_resource type="PackedScene" uid="uid://bmpclaaxl4jf6" path="res://scenes/location_marker_icon.tscn" id="3_vpnfn"]
 [ext_resource type="Texture2D" uid="uid://x70m4jgydasp" path="res://resources/sprites/Rectangle 13.png" id="5_2r48t"]
-[ext_resource type="FontFile" uid="uid://kll2grp8sedk" path="res://resources/fonts/chernobyl/Chernobyl.otf" id="6_6tjnb"]
 [ext_resource type="Texture2D" uid="uid://dey863qt850rf" path="res://resources/sprites/back_return_icon.png" id="6_xd1np"]
 [ext_resource type="Texture2D" uid="uid://f2tvfmruyp0j" path="res://resources/sprites/Group 12.png" id="7_acqds"]
+[ext_resource type="FontFile" uid="uid://dudavg4se1plt" path="res://resources/fonts/younger_than_me/Younger than me.ttf" id="7_uf5ml"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y2rp8"]
 texture = ExtResource("2_ldq71")
@@ -112,6 +112,7 @@ offset_right = 1275.0
 offset_bottom = 143.0
 
 [node name="Level1Slider" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -148,7 +149,7 @@ theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="Level1Slider/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 10
 
 [node name="backbuttonContainer" type="MarginContainer" parent="Level1Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -174,7 +175,7 @@ theme_override_constants/margin_top = 35
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 50
 text = "Select location"
 horizontal_alignment = 1
@@ -205,8 +206,8 @@ theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = ExtResource("6_6tjnb")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("7_uf5ml")
+theme_override_font_sizes/font_size = 20
 text = "What happened to this city?
 Why is everything...stopped?
 Bombs, sound, dust.
@@ -227,12 +228,11 @@ layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 36
 text = "START LEVEL 1"
 
 [node name="Level2Slider" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -269,7 +269,7 @@ theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="Level2Slider/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 10
 
 [node name="backbuttonContainer" type="MarginContainer" parent="Level2Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -297,7 +297,7 @@ theme_override_constants/margin_top = 35
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 50
 text = "Select location"
 horizontal_alignment = 1
@@ -328,8 +328,8 @@ theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = ExtResource("6_6tjnb")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("7_uf5ml")
+theme_override_font_sizes/font_size = 20
 text = "These ruins seem to be endless.
 But I have bad feeling about this.
 I need to hurry..."
@@ -349,7 +349,7 @@ layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 36
 text = "START LEVEL 2"
 
@@ -391,7 +391,7 @@ theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="Level3Slider/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 10
 
 [node name="backbuttonContainer" type="MarginContainer" parent="Level3Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -419,7 +419,7 @@ theme_override_constants/margin_top = 35
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 50
 text = "Select location"
 horizontal_alignment = 1
@@ -450,8 +450,8 @@ theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 10
-theme_override_fonts/font = ExtResource("6_6tjnb")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("7_uf5ml")
+theme_override_font_sizes/font_size = 20
 text = "The situation seems to deteoriate by the minute.
 Only if time did move right now.
 But the rumblings have increased.
@@ -472,7 +472,7 @@ layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 36
 text = "START LEVEL 3"
 
@@ -514,7 +514,7 @@ theme_override_constants/separation = 5
 
 [node name="headerContainer" type="HBoxContainer" parent="Level4Slider/sliderContentContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 10
 
 [node name="backbuttonContainer" type="MarginContainer" parent="Level4Slider/sliderContentContainer/headerContainer"]
 layout_mode = 2
@@ -542,7 +542,7 @@ theme_override_constants/margin_top = 35
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 50
 text = "Select location"
 horizontal_alignment = 1
@@ -573,8 +573,8 @@ theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = ExtResource("6_6tjnb")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("7_uf5ml")
+theme_override_font_sizes/font_size = 20
 text = "Ok, staying here isn't a wise choice.
 I need to haste.
 Or I will perish."
@@ -594,7 +594,7 @@ layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_6tjnb")
+theme_override_fonts/font = ExtResource("7_uf5ml")
 theme_override_font_sizes/font_size = 36
 text = "START LEVEL 4"
 
