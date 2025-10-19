@@ -74,8 +74,8 @@ finish_menu_3 = NodePath("FinishMenuLevel3")
 finish_menu_4 = NodePath("FinishMenuLevel4")
 
 [node name="HomeMenuContainer" type="MarginContainer" parent="."]
-offset_right = 1281.0
-offset_bottom = 721.0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="Panel" type="Panel" parent="HomeMenuContainer"]
 layout_mode = 2
@@ -183,7 +183,7 @@ offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="OptionMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.784314)
 
 [node name="PauseTitle" type="MarginContainer" parent="OptionMenuContainer"]
 layout_mode = 2
@@ -235,8 +235,8 @@ text = "BACK"
 
 [node name="inGameUI" type="MarginContainer" parent="."]
 visible = false
-offset_right = 1277.0
-offset_bottom = 722.0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="inGameUI"]
 layout_mode = 2
@@ -287,15 +287,12 @@ expand_icon = true
 
 [node name="PauseMenuScreen" type="MarginContainer" parent="."]
 visible = false
-offset_left = 3.0
 offset_right = 1280.0
-offset_bottom = 722.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = 720.0
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenuScreen"]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.784314)
 
 [node name="PauseTitle" type="MarginContainer" parent="PauseMenuScreen"]
 layout_mode = 2
@@ -365,13 +362,12 @@ text = "QUIT"
 
 [node name="ControlsMenuContainer" type="MarginContainer" parent="."]
 visible = false
-offset_left = 3.0
 offset_right = 1280.0
 offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="ControlsMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.784314)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ControlsMenuContainer"]
 layout_mode = 2
@@ -489,17 +485,16 @@ stretch_mode = 4
 
 [node name="HomeToControlsMenuContainer" type="MarginContainer" parent="."]
 visible = false
-offset_left = 3.0
 offset_right = 1280.0
 offset_bottom = 722.0
 
 [node name="ColorRect" type="ColorRect" parent="HomeToControlsMenuContainer"]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.784314)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HomeToControlsMenuContainer"]
 layout_mode = 2
-theme_override_constants/separation = -10
+theme_override_constants/separation = -15
 alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HomeToControlsMenuContainer/VBoxContainer"]
@@ -612,12 +607,12 @@ stretch_mode = 4
 
 [node name="settingsMenu" type="MarginContainer" parent="."]
 visible = false
-offset_right = 1282.0
+offset_right = 1280.0
 offset_bottom = 728.0
 
 [node name="ColorRect" type="ColorRect" parent="settingsMenu"]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.784314)
 
 [node name="MarginContainer3" type="MarginContainer" parent="settingsMenu"]
 layout_mode = 2
@@ -681,12 +676,12 @@ horizontal_alignment = 1
 
 [node name="homeToSettingsMenu" type="MarginContainer" parent="."]
 visible = false
-offset_right = 1282.0
+offset_right = 1280.0
 offset_bottom = 728.0
 
 [node name="ColorRect" type="ColorRect" parent="homeToSettingsMenu"]
 layout_mode = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.12549, 0.12549, 0.12549, 0.784314)
 
 [node name="MarginContainer3" type="MarginContainer" parent="homeToSettingsMenu"]
 layout_mode = 2
@@ -973,12 +968,16 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("3_ee8gx")
 theme_override_font_sizes/font_size = 20
-text = " Product of      -     Team Backstage
-     Art by      -      Equilibrium K
-               Sounds by     -      Pakena Larva, Stintx
-      Music by      -      Rafael Krux        "
+text = "-------CREDITS--------
+Product of......Abrar Huda Siddiqui
+Art by......Abrar Huda Siddiqui
+Sounds by......Pakena Larva & Stintx
+Music by......Rafael Krux
+Font By......Magique Fonts"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 161
 uppercase = true
 
 [connection signal="pressed" from="HomeMenuContainer/ContentContainer/optionsMainMenuContainer/startGameButton" to="." method="_on_start_game_button_pressed"]

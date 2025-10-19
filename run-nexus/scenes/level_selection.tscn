@@ -112,7 +112,6 @@ offset_right = 1275.0
 offset_bottom = 143.0
 
 [node name="Level1Slider" type="NinePatchRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -233,6 +232,7 @@ theme_override_font_sizes/font_size = 36
 text = "START LEVEL 1"
 
 [node name="Level2Slider" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
